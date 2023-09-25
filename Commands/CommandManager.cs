@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using BiscuitOS.FileExplorer;
 
 namespace BiscuitOS.Commands
@@ -33,6 +34,9 @@ namespace BiscuitOS.Commands
                  */
                 if (commandWord[0] == "exit")
                 {
+                    Console.Clear();
+                    Console.WriteLine("Shutting Down! See you later.");
+                    Thread.Sleep(1000);
                     Cosmos.System.Power.Shutdown();
                 }else if (commandWord[0] == "cls")
                 {
@@ -68,6 +72,10 @@ namespace BiscuitOS.Commands
                 else if (commandWord[0] == "bkdir")
                 {
                     CurrentFileMan.BackDir();
+                }else if (commandWord[0] == "fm")
+                {
+                    // Access file man
+                    CurrentFileMan.ParseFileCommand(commandWord);
                 }
                 else if (commandWord[0] == "rd")
                 {
