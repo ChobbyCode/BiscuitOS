@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BiscuitOS.FileExecutable;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -55,6 +56,10 @@ namespace BiscuitOS.FileExplorer
                 {
                     Console.WriteLine("Failed to delete file.");
                 }
+            }else if (commandWord[1] == "run")
+            {
+                FMFile fmFile = new FMFile();
+                fmFile.RunFile(GetPath() + commandWord[2], this);
             }
             else
             {
