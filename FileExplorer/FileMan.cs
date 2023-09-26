@@ -44,6 +44,17 @@ namespace BiscuitOS.FileExplorer
                 {
                     Console.WriteLine("Failed to write to file");
                 }
+            }else if (commandWord[1] == "del")
+            {
+                try
+                {
+                    File.Delete(GetPath() + commandWord[2]);
+                    Console.WriteLine("Deleted File.");
+                }
+                catch
+                {
+                    Console.WriteLine("Failed to delete file.");
+                }
             }
             else
             {

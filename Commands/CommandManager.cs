@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
+using Apps.MIV;
 using BiscuitOS.FileExplorer;
 
 namespace BiscuitOS.Commands
@@ -83,9 +84,12 @@ namespace BiscuitOS.Commands
                     Console.WriteLine();
                     Console.WriteLine(CurrentFileMan.ReadFile(commandWord[1]));
                     Console.WriteLine();
-                    Console.WriteLine("Click Enter To Close File...");
                     Console.ReadLine();
                     Console.Clear();
+                }else if (commandWord[0] == "miv")
+                {
+                    string[] args = { CurrentFileMan.GetPath() + commandWord[1] };
+                    MIV.StartMIV(args);
                 }
                 else
                 {

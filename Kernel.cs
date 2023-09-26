@@ -1,10 +1,6 @@
 ﻿using System;
 using Sys = Cosmos.System;
 using BiscuitOS.Commands;
-using Cosmos.System.Graphics;
-using System.Drawing;
-using System.Threading;
-using System.IO;
 using BiscuitOS.FileExplorer;
 
 namespace BiscuitOS
