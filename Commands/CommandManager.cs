@@ -90,6 +90,9 @@ namespace BiscuitOS.Commands
                 {
                     string[] args = { CurrentFileMan.GetPath() + commandWord[1] };
                     MIV.StartMIV(args);
+                }else if (commandWord[0] == "print")
+                {
+                    Console.WriteLine(commandWord[1]);
                 }
                 else
                 {

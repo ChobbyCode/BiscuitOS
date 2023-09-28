@@ -221,6 +221,16 @@ namespace Apps.MIV
                     continue;
                 }
 
+                else if (keyInfo.Key == ConsoleKey.UpArrow)
+                {
+                    // Increase Line Up
+                }
+
+                else if (keyInfo.Key == ConsoleKey.DownArrow)
+                {
+                    // Increase Line Down
+                }
+
                 else if (keyInfo.Key == ConsoleKey.I && !editMode)
                 {
                     editMode = true;
