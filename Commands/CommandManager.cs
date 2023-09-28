@@ -93,6 +93,10 @@ namespace BiscuitOS.Commands
                 }else if (commandWord[0] == "print")
                 {
                     Console.WriteLine(commandWord[1]);
+                }else if (commandWord[0] == "if")
+                {
+                    // If statements
+                    CurrentFileMan = IfStatement(commandWord, CurrentFileMan);
                 }
                 else
                 {
@@ -105,8 +109,31 @@ namespace BiscuitOS.Commands
             catch
             {
                 return CurrentFileMan;
-                Console.WriteLine("Please specify a component after command word.");
+                //Console.WriteLine("Please specify a component after command word.");
             }
+            return CurrentFileMan;
+        }
+
+        public FileMan IfStatement(string[] commandWord, FileMan CurrentFileMan)
+        {
+            // Convert The IfStatement To A Straight String
+            string commandString = ""; // Command Words To String
+            foreach(string arg in commandWord)
+            {
+                commandString = commandString + arg;
+            }
+
+            Console.WriteLine(commandString);
+
+            /*// Parse the if statement
+            char letter = ' '; // Letter it is on
+            string stLetter = "";
+            int loop = -1;
+            while(letter != '"' || stLetter != "'")
+            {
+                loop++;
+            }*/
+
             return CurrentFileMan;
         }
     }
