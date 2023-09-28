@@ -116,6 +116,7 @@ namespace BiscuitOS.Commands
 
         public FileMan IfStatement(string[] commandWord, FileMan CurrentFileMan)
         {
+
             // Convert The IfStatement To A Straight String
             string commandString = ""; // Command Words To String
             foreach(string arg in commandWord)
@@ -125,14 +126,49 @@ namespace BiscuitOS.Commands
 
             Console.WriteLine(commandString);
 
-            /*// Parse the if statement
+            // Safe code to prevent infin loop
+            if (!commandString.Contains('"') && !commandString.Contains("'"))
+            {
+                Console.WriteLine("Cannot Parse If Statement");
+                return CurrentFileMan;
+            }
+
+            // Parse the if statement
             char letter = ' '; // Letter it is on
             string stLetter = "";
             int loop = -1;
+            // Find what the question will be
             while(letter != '"' || stLetter != "'")
             {
                 loop++;
-            }*/
+
+                letter = commandString[loop];
+                stLetter = commandString[loop].ToString();
+            }
+
+            int start = loop;
+            // Now find the end
+
+            // Reset Variables
+            letter = ' '; // Letter it is on
+            stLetter = "";
+            loop++;
+            while (letter != '"' || stLetter != "'")
+            {
+                loop++;
+
+                letter = commandString[loop];
+                stLetter = commandString[loop].ToString();
+            }
+
+            int end = loop;
+
+            // We now know what the question is.
+
+            // We can then remove stuff
+            string question = commandString.Remove(start, end);
+
+            Console.WriteLine(question);
 
             return CurrentFileMan;
         }
