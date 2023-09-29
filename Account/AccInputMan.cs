@@ -9,36 +9,43 @@ namespace BiscuitOS.Account
 {
     public class AccInputMan
     {
-        public string ObfuscatedInput(string msg)
+        public string ObfuscateInput(string msg)
         {
-            Console.Write(msg);
 
-            var pass = string.Empty;
-            /*ConsoleKey key;
+            var input = string.Empty;
+            ConsoleKey key;
             do
             {
                 var keyInfo = Console.ReadKey(intercept: true);
                 key = keyInfo.Key;
 
-                if (key == ConsoleKey.Backspace && pass.Length > 0)
+                if(key == ConsoleKey.Backspace)
                 {
-                    Console.Write("\b \b");
-                    pass = pass[0..^1];
+                    // Delete Last Key
+                    try
+                    {
+                        input.Remove(input.Length - 1, 1);
+                    }
+                    catch
+                    {
+                        // Do Nothing
+                    }
                 }
-                else if (!char.IsControl(keyInfo.KeyChar))
+
+                string write = String.Empty;
+
+                // Create String Of *'s
+                foreach(char letter in input)
                 {
-                    Console.Write("*");
-                    pass += keyInfo.KeyChar;
+                    write = write + "*";
                 }
-            } while (key != ConsoleKey.Enter);*/
 
-            for (int i = 0; i < 100; ++i)
-            {
-                Console.Write("\r{0}%   ", i);
-                Thread.Sleep(100);
-            }
+                // Write Text
+                Console.Write("\r{0}%   ", msg + ": " + write);
 
-            return pass;
+            } while (key != ConsoleKey.Enter);
+
+            return input;
         }
     }
 }
