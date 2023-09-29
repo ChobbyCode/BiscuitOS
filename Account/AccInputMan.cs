@@ -29,7 +29,7 @@ namespace BiscuitOS.Account
                     }
                     catch
                     {
-                        // Do Nothing
+                        if (key != ConsoleKey.Enter) { }
                     }
                 }
                 else
