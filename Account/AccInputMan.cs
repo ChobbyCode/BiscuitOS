@@ -19,7 +19,7 @@ namespace BiscuitOS.Account
                 var keyInfo = Console.ReadKey(intercept: true);
                 key = keyInfo.Key;
 
-                input = input + key;
+                input = input + key.ToString();
 
                 Console.Write("\r{0}%   ", input);
 
