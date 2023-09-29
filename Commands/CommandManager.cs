@@ -98,12 +98,6 @@ namespace BiscuitOS.Commands
                 {
                     // If statements
                     CurrentFileMan = IfStatement(commandWord, CurrentFileMan);
-                }else if (commandWord[0] == "sign")
-                {
-                    // This is for testing
-                    AccInputMan inputMan = new AccInputMan();
-
-                    inputMan.ObfuscateInput("Password: ");
                 }
                 else
                 {

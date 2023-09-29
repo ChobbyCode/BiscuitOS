@@ -2,6 +2,7 @@
 using Sys = Cosmos.System;
 using BiscuitOS.Commands;
 using BiscuitOS.FileExplorer;
+using BiscuitOS.Account;
 
 namespace BiscuitOS
 {
@@ -19,6 +20,21 @@ namespace BiscuitOS
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
             Console.Clear();
+
+            // Sign In
+
+            Console.Write("Username: ");
+            if(Console.ReadLine() != "admin")
+            {
+                commandManager.Command("exit", FileMan);
+            }
+
+            AccInputMan accInputMan = new AccInputMan();
+
+            if(accInputMan.ObfuscateInput("Password: ") != "password") 
+            {
+                commandManager.Command("exit", FileMan);
+            }
 
             var available_space = fs.GetAvailableFreeSpace(@"0:\");
             Console.WriteLine("Available Free Space: " + available_space);
