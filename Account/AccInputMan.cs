@@ -11,21 +11,24 @@ namespace BiscuitOS.Account
     {
         public string ObfuscateInput(string msg)
         {
+            List<char> input = new List<char>();
 
-            var input = string.Empty;
             ConsoleKey key;
             do
             {
-                var keyInfo = Console.ReadKey(intercept: true);
-                key = keyInfo.Key;
+                ConsoleKeyInfo consoleKey = Console.ReadKey(true);
+                key = consoleKey.Key;
+                char readLet = consoleKey.KeyChar;
 
-                input = input + key.ToString();
+                input.Add(readLet);
 
-                Console.Write("\r{0}%   ", input);
-
+                foreach(char let in input)
+                {
+                    Console.Write("\r {0}%", let);
+                }
             } while (key != ConsoleKey.Enter);
 
-            return input;
+            return String.Empty;
         }
     }
 }
