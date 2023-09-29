@@ -12,6 +12,7 @@ namespace BiscuitOS.Account
         public string ObfuscateInput(string msg)
         {
             List<char> input = new List<char>();
+            int prevLength = 0;
 
             ConsoleKey key;
             do
@@ -20,15 +21,54 @@ namespace BiscuitOS.Account
                 key = consoleKey.Key;
                 char readLet = consoleKey.KeyChar;
 
-                input.Add(readLet);
+                if (key == ConsoleKey.Backspace)
+                {
+                    try
+                    {
+                        input.RemoveAt(input.Count() - 1);
+                    }
+                    catch
+                    {
+                        // Do Nothing
+                    }
+                }
+                else
+                {
+                    input.Add(readLet);
+                }
+
+                ClearCurrentConsoleLine();
+
+                Console.Write(msg);
 
                 foreach(char let in input)
                 {
-                    Console.Write("\r {0}%", let);
+                    Console.Write("*");
                 }
+
+
+                prevLength = input.Count();
+
             } while (key != ConsoleKey.Enter);
 
-            return String.Empty;
+            string output = String.Empty;
+            foreach(char let in input)
+            {
+                output += let;
+            }
+
+            // End Line
+            Console.WriteLine();
+
+            return output;
+        }
+
+        public void ClearCurrentConsoleLine()
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, currentLineCursor);
         }
     }
 }
