@@ -103,7 +103,7 @@ namespace BiscuitOS.Commands
                     // This is for testing
                     AccInputMan inputMan = new AccInputMan();
 
-                    inputMan.ObfuscatedInput("Password: ");
+                    inputMan.ObfuscateInput("Password: ");
                 }
                 else
                 {

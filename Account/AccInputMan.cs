@@ -19,29 +19,9 @@ namespace BiscuitOS.Account
                 var keyInfo = Console.ReadKey(intercept: true);
                 key = keyInfo.Key;
 
-                if(key == ConsoleKey.Backspace)
-                {
-                    // Delete Last Key
-                    try
-                    {
-                        input.Remove(input.Length - 1, 1);
-                    }
-                    catch
-                    {
-                        // Do Nothing
-                    }
-                }
+                input = input + key;
 
-                string write = String.Empty;
-
-                // Create String Of *'s
-                foreach(char letter in input)
-                {
-                    write = write + "*";
-                }
-
-                // Write Text
-                Console.Write("\r{0}%   ", msg + ": " + write);
+                Console.Write("\r{0}%   ", input);
 
             } while (key != ConsoleKey.Enter);
 
