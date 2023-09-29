@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BiscuitOS.Account
@@ -13,7 +14,7 @@ namespace BiscuitOS.Account
             Console.Write(msg);
 
             var pass = string.Empty;
-            ConsoleKey key;
+            /*ConsoleKey key;
             do
             {
                 var keyInfo = Console.ReadKey(intercept: true);
@@ -29,7 +30,13 @@ namespace BiscuitOS.Account
                     Console.Write("*");
                     pass += keyInfo.KeyChar;
                 }
-            } while (key != ConsoleKey.Enter);
+            } while (key != ConsoleKey.Enter);*/
+
+            for (int i = 0; i < 100; ++i)
+            {
+                Console.Write("\r{0}%   ", i);
+                Thread.Sleep(100);
+            }
 
             return pass;
         }
