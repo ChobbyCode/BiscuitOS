@@ -11,6 +11,8 @@ namespace BiscuitOS.Account
     {
         public string ObfuscateInput(string msg)
         {
+            Console.Write(msg);
+
             List<char> input = new List<char>();
             int prevLength = 0;
 
