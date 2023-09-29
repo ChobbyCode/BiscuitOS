@@ -31,12 +31,12 @@ namespace BiscuitOS.Account
                     }
                     catch
                     {
-                        if (key != ConsoleKey.Enter) { }
+                        // Do Nothing
                     }
                 }
                 else
                 {
-                    input.Add(readLet);
+                    if (key != ConsoleKey.Enter) { input.Add(readLet); }
                 }
 
                 ClearCurrentConsoleLine();
