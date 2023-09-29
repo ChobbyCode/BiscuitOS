@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading;
 using Apps.MIV;
+using BiscuitOS.Account;
 using BiscuitOS.FileExplorer;
 
 namespace BiscuitOS.Commands
@@ -97,6 +98,12 @@ namespace BiscuitOS.Commands
                 {
                     // If statements
                     CurrentFileMan = IfStatement(commandWord, CurrentFileMan);
+                }else if (commandWord[0] == "sign")
+                {
+                    // This is for testing
+                    AccInputMan inputMan = new AccInputMan();
+
+                    inputMan.ObfuscatedInput("Password: ");
                 }
                 else
                 {
