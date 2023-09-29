@@ -3,6 +3,7 @@ using Sys = Cosmos.System;
 using BiscuitOS.Commands;
 using BiscuitOS.FileExplorer;
 using BiscuitOS.Account;
+using System.Threading;
 
 namespace BiscuitOS
 {
@@ -35,6 +36,11 @@ namespace BiscuitOS
             {
                 commandManager.Command("exit", FileMan);
             }
+
+            Console.Clear();
+            Console.WriteLine("Signing In..");
+            Thread.Sleep(1000);
+            Console.Clear();
 
             var available_space = fs.GetAvailableFreeSpace(@"0:\");
             Console.WriteLine("Available Free Space: " + available_space);
