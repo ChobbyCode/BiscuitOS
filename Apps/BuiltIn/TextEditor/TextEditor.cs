@@ -23,6 +23,13 @@ namespace BiscuitOS.Apps.TextEditor
             List<string> lines = new List<string>();
             lines = file.ToList();
 
+            if(lines.Count < 24) { 
+                while(lines.Count < 24)
+                {
+                    lines.Add("");
+                }
+            }
+
             int lineEdit = 0; // The Line We Are Editting
             
 
@@ -75,7 +82,7 @@ namespace BiscuitOS.Apps.TextEditor
             {
                 if(loop == writeLine)
                 {
-                    Console.WriteLine("> " + line);
+                    Console.WriteLine("> " + line + " <");
                 }
                 else
                 {
