@@ -27,12 +27,12 @@ namespace BiscuitOS.FileExplorer
                     }
                     else
                     {
-                        Console.WriteLine("Please specify a name for the file.");
+                        BConsole.WriteLine("Please specify a name for the file.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Incorrect use of command word 'new'");
+                    BConsole.WriteLine("Incorrect use of command word 'new'");
                 }
             }else if (commandWord[1] == "st")
             {
@@ -43,18 +43,18 @@ namespace BiscuitOS.FileExplorer
                 }
                 catch
                 {
-                    Console.WriteLine("Failed to write to file");
+                    BConsole.WriteLine("Failed to write to file");
                 }
             }else if (commandWord[1] == "del")
             {
                 try
                 {
                     File.Delete(GetPath() + commandWord[2]);
-                    Console.WriteLine("Deleted File.");
+                    BConsole.WriteLine("Deleted File.");
                 }
                 catch
                 {
-                    Console.WriteLine("Failed to delete file.");
+                    BConsole.WriteLine("Failed to delete file.");
                 }
             }else if (commandWord[1] == "run")
             {
@@ -63,7 +63,7 @@ namespace BiscuitOS.FileExplorer
             }
             else
             {
-                Console.WriteLine("Incorrect use of command word 'fm'");
+                BConsole.WriteLine("Incorrect use of command word 'fm'");
             }
         }
 
@@ -79,7 +79,7 @@ namespace BiscuitOS.FileExplorer
             string[] pathSplit = CurrentDir.Split(@"\");
             for (int i = 0; i < pathSplit.Length - 2; i++)
             {
-                Console.WriteLine(pathSplit[i]);
+                BConsole.WriteLine(pathSplit[i]);
                 newPath = newPath + pathSplit[i] + @"\";
             }
             CurrentDir = newPath;
@@ -91,20 +91,20 @@ namespace BiscuitOS.FileExplorer
 
             if(File.Exists(CurrentDir + fileName))
             {
-                Console.WriteLine();
-                Console.WriteLine("Error cannot create duplicate files of same name!");
-                Console.WriteLine();
+                BConsole.WriteLine();
+                BConsole.WriteLine("Error cannot create duplicate files of same name!");
+                BConsole.WriteLine();
                 return;
             }
 
             try
             {
                 var FileStream = File.Create(CurrentDir + fileName);
-                Console.WriteLine($"Created File {CurrentDir + fileName}");
+                BConsole.WriteLine($"Created File {CurrentDir + fileName}");
             }
             catch
             {
-                Console.WriteLine("Failed To Create File");
+                BConsole.WriteLine("Failed To Create File");
             }
         }
 

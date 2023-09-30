@@ -7,22 +7,39 @@ namespace BiscuitOS
 {
     public class BConsole
     {
+        public static ConsoleColor ForegroundColor = ConsoleColor.Black;
+        public static ConsoleColor BackgroundColor = ConsoleColor.DarkCyan;
+
         private static List<string> consoleText = new List<string>();
 
         public static void WriteLine(string text)
         {
             consoleText.Add(text);
-
+            RenderBConsole(consoleText.ToArray(), "", false);
+        }
+        public static void WriteLine()
+        {
+            consoleText.Add(String.Empty);
             RenderBConsole(consoleText.ToArray(), "", false);
         }
 
-        public static void Clear(string text)
+        public static void Clear()
         {
             consoleText.RemoveRange(0, consoleText.Count);
             RenderBConsole(consoleText.ToArray(), "", false);
         }
 
         public static string ReadLine()
+        {
+            return Read("");
+        }
+
+        public static string ReadLine(string msg)
+        {
+            return Read(msg);
+        }
+
+        private static string Read(string msg)
         {
             string line = String.Empty;
 
@@ -31,6 +48,8 @@ namespace BiscuitOS
             {
                 ConsoleKeyInfo keyInfo = InputManager.GetKeyInfo();
                 key = keyInfo.Key;
+
+                RenderBConsole(consoleText.ToArray(), msg + line, false);
 
                 if (!key.isForbiddenKey())
                 {
@@ -50,10 +69,7 @@ namespace BiscuitOS
                         }
                     }
                 }
-
-                RenderBConsole(consoleText.ToArray(), line, false);
-            } while (key != ConsoleKey.Enter); 
-
+            } while (key != ConsoleKey.Enter);
             return line;
         }
 
@@ -77,6 +93,9 @@ namespace BiscuitOS
                     output.RemoveAt(0);
                 }
             }
+
+            Console.ForegroundColor = ForegroundColor;
+            Console.BackgroundColor = BackgroundColor;
 
             Console.Clear();
 

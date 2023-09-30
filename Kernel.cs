@@ -23,7 +23,7 @@ namespace BiscuitOS
 
             Console.Clear();
 
-            /*// Sign In
+            // Sign In
             Console.Write("Username: ");
             if(Console.ReadLine() != "admin")
             {
@@ -47,18 +47,15 @@ namespace BiscuitOS
 
             Console.WriteLine();
             Console.WriteLine("Copyright ChobbyCode 2023.");
-            Console.WriteLine();*/
+            Console.WriteLine();
         }
 
         protected override void Run()
         {
-            /*//Text Stuff
-            Console.Write($"{FileMan.GetPath()}> ");
-            var input = Console.ReadLine();
-
-            FileMan = commandManager.Command(input, FileMan);*/
-
-            BConsole.WriteLine(BConsole.ReadLine());
+            //Text Stuff
+            var input = BConsole.ReadLine($"{FileMan.GetPath()}> ");
+            BConsole.WriteLine($"{FileMan.GetPath()}> {input}");
+            FileMan = commandManager.Command(input, FileMan);
         }
     }
 }

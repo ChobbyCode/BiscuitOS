@@ -29,9 +29,9 @@ namespace BiscuitOS.FileExecutable
             }
             catch
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Failed To Read '.fm' File.");
-                Console.ForegroundColor = ConsoleColor.White;
+                BConsole.ForegroundColor = ConsoleColor.Red;
+                BConsole.WriteLine("Failed To Read '.fm' File.");
+                BConsole.ForegroundColor = ConsoleColor.White;
             }
         }
     }

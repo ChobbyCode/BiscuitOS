@@ -22,9 +22,9 @@ namespace BiscuitOS.Commands
                 }
                 catch
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Unable To Call c# Function .ToLower()");
-                    Console.ForegroundColor = ConsoleColor.White;
+                    BConsole.ForegroundColor = ConsoleColor.Red;
+                    BConsole.WriteLine("Unable To Call c# Function .ToLower()");
+                    BConsole.ForegroundColor = ConsoleColor.White;
                 }
 
                 // Parse Command
@@ -37,38 +37,38 @@ namespace BiscuitOS.Commands
                  */
                 if (commandWord[0] == "exit")
                 {
-                    Console.Clear();
-                    Console.WriteLine("Shutting Down! See you later.");
+                    BConsole.Clear();
+                    BConsole.WriteLine("Shutting Down! See you later.");
                     Thread.Sleep(1000);
                     Cosmos.System.Power.Shutdown();
                 }
                 else if (commandWord[0] == "cls")
                 {
-                    Console.Clear();
+                    BConsole.Clear();
                 }
                 else if (commandWord[0] == "ls")
                 {
-                    Console.WriteLine(CurrentFileMan.GetPath());
+                    BConsole.WriteLine(CurrentFileMan.GetPath());
 
                     // List Current Dir Info
                     var files_list = Directory.GetFiles(CurrentFileMan.GetPath());
                     var directory_list = Directory.GetDirectories(CurrentFileMan.GetPath());
 
-                    Console.WriteLine();
-                    Console.WriteLine("    Files:");
-                    Console.WriteLine();
+                    BConsole.WriteLine();
+                    BConsole.WriteLine("    Files:");
+                    BConsole.WriteLine();
                     foreach (var file in files_list)
                     {
-                        Console.WriteLine("    " + file);
+                        BConsole.WriteLine("    " + file);
                     }
-                    Console.WriteLine();
-                    Console.WriteLine("    Directories:");
-                    Console.WriteLine();
+                    BConsole.WriteLine();
+                    BConsole.WriteLine("    Directories:");
+                    BConsole.WriteLine();
                     foreach (var directory in directory_list)
                     {
-                        Console.WriteLine("    " + directory);
+                        BConsole.WriteLine("    " + directory);
                     }
-                    Console.WriteLine();
+                    BConsole.WriteLine();
                 }
                 else if (commandWord[0] == "cd")
                 {
@@ -85,12 +85,12 @@ namespace BiscuitOS.Commands
                 }
                 else if (commandWord[0] == "rd")
                 {
-                    Console.Clear();
-                    Console.WriteLine();
-                    Console.WriteLine(CurrentFileMan.ReadFile(commandWord[1]));
-                    Console.WriteLine();
-                    Console.ReadLine();
-                    Console.Clear();
+                    BConsole.Clear();
+                    BConsole.WriteLine();
+                    BConsole.WriteLine(CurrentFileMan.ReadFile(commandWord[1]));
+                    BConsole.WriteLine();
+                    BConsole.ReadLine();
+                    BConsole.Clear();
                 }
                 else if (commandWord[0] == "miv")
                 {
@@ -104,7 +104,7 @@ namespace BiscuitOS.Commands
                 }
                 else if (commandWord[0] == "print")
                 {
-                    Console.WriteLine(commandWord[1]);
+                    BConsole.WriteLine(commandWord[1]);
                 }
                 else if (commandWord[0] == "if")
                 {
@@ -115,14 +115,14 @@ namespace BiscuitOS.Commands
                 {
                     if (commandWord[0] != "")
                     {
-                        Console.WriteLine($"'{commandWord[0]}' is not recognized as an internal or external batch command.");
+                        BConsole.WriteLine($"'{commandWord[0]}' is not recognized as an internal or external batch command.");
                     }
                 }
             }
             catch
             {
                 return CurrentFileMan;
-                //Console.WriteLine("Please specify a component after command word.");
+                //BConsole.WriteLine("Please specify a component after command word.");
             }
             return CurrentFileMan;
         }
@@ -137,12 +137,12 @@ namespace BiscuitOS.Commands
                 commandString = commandString + arg;
             }
 
-            Console.WriteLine(commandString);
+            BConsole.WriteLine(commandString);
 
             // Safe code to prevent infin loop
             if (!commandString.Contains('"') && !commandString.Contains("'"))
             {
-                Console.WriteLine("Cannot Parse If Statement");
+                BConsole.WriteLine("Cannot Parse If Statement");
                 return CurrentFileMan;
             }
 
@@ -181,7 +181,7 @@ namespace BiscuitOS.Commands
             // We can then remove stuff
             string question = commandString.Remove(start, end);
 
-            Console.WriteLine(question);
+            BConsole.WriteLine(question);
 
             return CurrentFileMan;
         }
