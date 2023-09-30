@@ -13,10 +13,10 @@ namespace BiscuitOS.Apps.TextEditor
             // Start The Editor
             string[] file = File.ReadAllLines(filePath[0]);
 
-            TextEditorM(file);
+            TextEditorM(file, filePath[0]);
         }
 
-        private static void TextEditorM(string[] file)
+        private static void TextEditorM(string[] file, string path)
         {
             List<string> lines = new List<string>();
             lines = file.ToList();
@@ -60,7 +60,19 @@ namespace BiscuitOS.Apps.TextEditor
                     {
                         // Do Nothing
                     }
-                }else if (key != ConsoleKey.UpArrow && key != ConsoleKey.DownArrow)
+                }
+                else if (readLet == ':')
+                {
+                    consoleKey = Console.ReadKey(true);
+                    key = consoleKey.Key;
+                    readLet = consoleKey.KeyChar;
+
+                    if(key == ConsoleKey.S)
+                    {
+                        File.WriteAllLines(path, lines);
+                    }
+                }
+                else if (key != ConsoleKey.UpArrow && key != ConsoleKey.DownArrow)
                 {
                     lines[lineEdit] = lines[lineEdit] + consoleKey.KeyChar;
                 }

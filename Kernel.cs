@@ -54,10 +54,10 @@ namespace BiscuitOS
         protected override void Run()
         {
             //Text Stuff
-            Console.Write($"{FileMan.GetPath()}> ");
+            /*Console.Write($"{FileMan.GetPath()}> ");
             var input = Console.ReadLine();
 
-            FileMan = commandManager.Command(input, FileMan);
+            FileMan = commandManager.Command(input, FileMan);*/
         }
     }
 }
