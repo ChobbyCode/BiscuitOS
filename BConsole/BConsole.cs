@@ -1,71 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BiscuitOS
 {
     public class BConsole
     {
         private static List<string> consoleText = new List<string>();
-        private static bool RunBConsole = false;
-
-        public static void StartBConsole()
-        {
-            Console.Clear();
-            RunBConsole = true;
-            Run();
-        }
-
-        public static void DisposeBConsole()
-        { 
-            RunBConsole = false;
-        }
 
         public static void WriteLine(string text)
         {
             consoleText.Add(text);
+
+            RenderBConsole(consoleText.ToArray(), "", false);
         }
 
-        private static void Run()
+        public static void Clear(string text)
         {
-            string currentText = String.Empty;
+            consoleText.RemoveRange(0, consoleText.Count);
+            RenderBConsole(consoleText.ToArray(), "", false);
+        }
+
+        public static string ReadLine()
+        {
+            string line = String.Empty;
+
+            ConsoleKey key;
             do
             {
                 ConsoleKeyInfo keyInfo = InputManager.GetKeyInfo();
-                ConsoleKey key = keyInfo.Key;
+                key = keyInfo.Key;
 
                 if (!key.isForbiddenKey())
                 {
-                    currentText += keyInfo.KeyChar;
+                    line += keyInfo.KeyChar;
                 }
                 else
                 {
-                    BConsole.WriteLine("Is forbidden key");
-                    switch (key)
+                    if (key == ConsoleKey.Backspace)
                     {
-                        case ConsoleKey.Backspace:
-                            // Remove Last Character
-                            currentText.Remove(currentText.Length - 1, 1);
-                            break;
-                            
-                        case ConsoleKey.Tab:
-                            currentText += "    ";
-                            break;
-
-                        default:
-                            break;
+                        try
+                        {
+                            line = line.Remove(line.Length - 1, 1);
+                        }
+                        catch
+                        {
+                            // Do nothing
+                        }
                     }
                 }
 
-                RenderBConsole(new string[0], currentText, false);
+                RenderBConsole(consoleText.ToArray(), line, false);
+            } while (key != ConsoleKey.Enter); 
 
-            } while (RunBConsole);
+            return line;
         }
 
         private static void RenderBConsole(string[] lines, string actionBar, bool ObfuscateInput)
         {
-            Console.Clear();
-
             // Basic Setup Stuff
             List<string> output = new List<string>();
             output = lines.ToList();
@@ -76,6 +69,16 @@ namespace BiscuitOS
                     output.Add(String.Empty);
                 }
             }
+
+            if (output.Count > 23)
+            {
+                while (output.Count > 23)
+                {
+                    output.RemoveAt(0);
+                }
+            }
+
+            Console.Clear();
 
             // Render Everything
             foreach (string line in output)

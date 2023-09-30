@@ -58,7 +58,7 @@ namespace BiscuitOS
 
             FileMan = commandManager.Command(input, FileMan);*/
 
-            BConsole.StartBConsole();
+            BConsole.WriteLine(BConsole.ReadLine());
         }
     }
 }
