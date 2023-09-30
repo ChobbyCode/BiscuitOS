@@ -63,13 +63,14 @@ namespace BiscuitOS.Apps.TextEditor
                 }
                 else if (readLet == ':')
                 {
-                    consoleKey = Console.ReadKey(true);
-                    key = consoleKey.Key;
-                    readLet = consoleKey.KeyChar;
-
-                    if(key == ConsoleKey.S)
+                    Console.Write(": ");
+                    var input = Console.ReadLine();
+                    if(input == "s")
                     {
-                        File.WriteAllLines(path, lines);
+                        File.WriteAllLines(path, lines.ToArray());
+                    }else if(input == "e")
+                    {
+                        key = ConsoleKey.Escape;
                     }
                 }
                 else if (key != ConsoleKey.UpArrow && key != ConsoleKey.DownArrow)
@@ -80,6 +81,7 @@ namespace BiscuitOS.Apps.TextEditor
                 // RenderScreen
                 RenderScreen(lines.ToArray(), "Test", "Empty", lineEdit);
             } while(key != ConsoleKey.Escape);
+            Console.Clear();
         }
 
         private static void RenderScreen(string[] chars, string fileName, string info, int writeLine)
