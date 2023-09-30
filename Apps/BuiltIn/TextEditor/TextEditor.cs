@@ -8,12 +8,10 @@ namespace BiscuitOS.Apps.TextEditor
 {
     public class TextEditor
     {
-        public static void StartTextEditor(/*string filePath*/)
+        public static void StartTextEditor(string[] filePath)
         {
             // Start The Editor
-            //string[] file = File.ReadAllLines(filePath);
-
-            string[] file = { "Hello, World", "Hello, World" };
+            string[] file = File.ReadAllLines(filePath[0]);
 
             TextEditorM(file);
         }
@@ -82,7 +80,7 @@ namespace BiscuitOS.Apps.TextEditor
             {
                 if(loop == writeLine)
                 {
-                    Console.WriteLine("> " + line + " <");
+                    Console.WriteLine("> " + line);
                 }
                 else
                 {

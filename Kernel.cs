@@ -53,13 +53,11 @@ namespace BiscuitOS
 
         protected override void Run()
         {
-            /*//Text Stuff
+            //Text Stuff
             Console.Write($"{FileMan.GetPath()}> ");
             var input = Console.ReadLine();
 
-            FileMan = commandManager.Command(input, FileMan);*/
-
-            TextEditor.StartTextEditor();
+            FileMan = commandManager.Command(input, FileMan);
         }
     }
 }

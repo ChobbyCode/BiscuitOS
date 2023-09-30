@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading;
 using Apps.MIV;
 using BiscuitOS.Account;
+using BiscuitOS.Apps.TextEditor;
 using BiscuitOS.FileExplorer;
 
 namespace BiscuitOS.Commands
@@ -40,10 +41,12 @@ namespace BiscuitOS.Commands
                     Console.WriteLine("Shutting Down! See you later.");
                     Thread.Sleep(1000);
                     Cosmos.System.Power.Shutdown();
-                }else if (commandWord[0] == "cls")
+                }
+                else if (commandWord[0] == "cls")
                 {
                     Console.Clear();
-                }else if (commandWord[0] == "ls")
+                }
+                else if (commandWord[0] == "ls")
                 {
                     Console.WriteLine(CurrentFileMan.GetPath());
 
@@ -74,7 +77,8 @@ namespace BiscuitOS.Commands
                 else if (commandWord[0] == "bkdir")
                 {
                     CurrentFileMan.BackDir();
-                }else if (commandWord[0] == "fm")
+                }
+                else if (commandWord[0] == "fm")
                 {
                     // Access file man
                     CurrentFileMan.ParseFileCommand(commandWord);
@@ -87,14 +91,22 @@ namespace BiscuitOS.Commands
                     Console.WriteLine();
                     Console.ReadLine();
                     Console.Clear();
-                }else if (commandWord[0] == "miv")
+                }
+                else if (commandWord[0] == "miv")
                 {
                     string[] args = { CurrentFileMan.GetPath() + commandWord[1] };
                     MIV.StartMIV(args);
-                }else if (commandWord[0] == "print")
+                }
+                else if (commandWord[0] == "open")
+                {
+                    string[] args = { CurrentFileMan.GetPath() + commandWord[1] };
+                    TextEditor.StartTextEditor(args);
+                }
+                else if (commandWord[0] == "print")
                 {
                     Console.WriteLine(commandWord[1]);
-                }else if (commandWord[0] == "if")
+                }
+                else if (commandWord[0] == "if")
                 {
                     // If statements
                     CurrentFileMan = IfStatement(commandWord, CurrentFileMan);
