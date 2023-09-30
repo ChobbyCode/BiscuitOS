@@ -46,26 +46,14 @@ namespace BiscuitOS.Apps.TextEditor
                     lineEdit++;
                 }
 
-                // Deleting Support
-                if(key == ConsoleKey.Delete)
+                if (key != ConsoleKey.UpArrow && key != ConsoleKey.DownArrow)
                 {
-                    try
+                    if(key == ConsoleKey.Backspace)
                     {
-                        // Store Line
-                        string currentLine = lines[lineEdit];
-                        lines[lineEdit].Remove(1);
-                    }catch
-                    {
-                        
+                        // Delete Last Char
+                        lines[lineEdit] = lines[lineEdit].Remove(lines[lineEdit].Length - 1, 1);
                     }
-                }
-                else
-                {
-                    // Add Character To End
-                    if(key != ConsoleKey.UpArrow || key != ConsoleKey.DownArrow || key != ConsoleKey.Delete)
-                    {
-                        lines[lineEdit] = lines[lineEdit] + consoleKey.KeyChar;
-                    }
+                    lines[lineEdit] = lines[lineEdit] + consoleKey.KeyChar;
                 }
 
                 // RenderScreen
