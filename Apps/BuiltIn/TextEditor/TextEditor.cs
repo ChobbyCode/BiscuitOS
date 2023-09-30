@@ -35,14 +35,12 @@ namespace BiscuitOS.Apps.TextEditor
                 char readLet = consoleKey.KeyChar;
 
                 // Check If lineEdit Needs To Change
-                if(key == ConsoleKey.UpArrow)
+                if(key == ConsoleKey.UpArrow && lineEdit != 0)
                 {
-                    if (lineEdit == 0) continue;
                     lineEdit--;
                 }
-                if(key == ConsoleKey.DownArrow)
+                if(key == ConsoleKey.DownArrow && lineEdit != lines.Count() - 1)
                 {
-                    if (lineEdit == lines.Count()) continue;
                     lineEdit++;
                 }
 
