@@ -4,6 +4,7 @@ using BiscuitOS.Commands;
 using BiscuitOS.FileExplorer;
 using BiscuitOS.Account;
 using System.Threading;
+using BiscuitOS.Apps.TextEditor;
 
 namespace BiscuitOS
 {
@@ -52,11 +53,13 @@ namespace BiscuitOS
 
         protected override void Run()
         {
-            //Text Stuff
+            /*//Text Stuff
             Console.Write($"{FileMan.GetPath()}> ");
             var input = Console.ReadLine();
 
-            FileMan = commandManager.Command(input, FileMan);
+            FileMan = commandManager.Command(input, FileMan);*/
+
+            TextEditor.StartTextEditor();
         }
     }
 }

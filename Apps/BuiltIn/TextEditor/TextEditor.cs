@@ -8,17 +8,17 @@ namespace BiscuitOS.Apps.TextEditor
 {
     public class TextEditor
     {
-        public void StartTextEditor(/*string filePath*/)
+        public static void StartTextEditor(/*string filePath*/)
         {
             // Start The Editor
             //string[] file = File.ReadAllLines(filePath);
 
-            string[] file = { "Hello, World" };
+            string[] file = { "Hello, World", "Hello, World" };
 
             TextEditorM(file);
         }
 
-        private void TextEditorM(string[] file)
+        private static void TextEditorM(string[] file)
         {
             List<string> lines = new List<string>();
             lines = file.ToList();
@@ -53,10 +53,10 @@ namespace BiscuitOS.Apps.TextEditor
                     {
                         // Store Line
                         string currentLine = lines[lineEdit];
-                        lines[lineEdit].Remove(currentLine.Length - 1, 1);
+                        lines[lineEdit].Remove(1);
                     }catch
                     {
-                        continue;
+                        
                     }
                 }
                 else
@@ -73,7 +73,7 @@ namespace BiscuitOS.Apps.TextEditor
             } while(key != ConsoleKey.Escape);
         }
 
-        private void RenderScreen(string[] chars, string fileName, string info)
+        private static void RenderScreen(string[] chars, string fileName, string info)
         {
             // Render The Screen
             Console.Clear();
