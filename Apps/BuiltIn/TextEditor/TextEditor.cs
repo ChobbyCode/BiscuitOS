@@ -3,6 +3,7 @@ using System;
 using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
+using Cosmos.Core;
 
 namespace BiscuitOS.Apps.TextEditor
 {
@@ -13,6 +14,7 @@ namespace BiscuitOS.Apps.TextEditor
             // Start The Editor
             string[] file = File.ReadAllLines(filePath[0]);
 
+            RenderScreen(file.ToArray(), "Test", "Empty", 0);
             TextEditorM(file, filePath[0]);
         }
 

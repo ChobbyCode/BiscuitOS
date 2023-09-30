@@ -36,6 +36,7 @@ namespace BiscuitOS
 
         public static string ReadLine(string msg)
         {
+            RenderBConsole(consoleText.ToArray(), msg, false);
             return Read(msg);
         }
 
@@ -48,8 +49,6 @@ namespace BiscuitOS
             {
                 ConsoleKeyInfo keyInfo = InputManager.GetKeyInfo();
                 key = keyInfo.Key;
-
-                RenderBConsole(consoleText.ToArray(), msg + line, false);
 
                 if (!key.isForbiddenKey())
                 {
@@ -69,6 +68,7 @@ namespace BiscuitOS
                         }
                     }
                 }
+                RenderBConsole(consoleText.ToArray(), msg + line, false);
             } while (key != ConsoleKey.Enter);
             return line;
         }
