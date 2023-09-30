@@ -46,29 +46,44 @@ namespace BiscuitOS.Apps.TextEditor
                     lineEdit++;
                 }
 
-                if (key != ConsoleKey.UpArrow && key != ConsoleKey.DownArrow)
+                if (key == ConsoleKey.Backspace)
                 {
-                    if(key == ConsoleKey.Backspace)
+                    // Delete Last Char
+                    try
                     {
-                        // Delete Last Char
                         lines[lineEdit] = lines[lineEdit].Remove(lines[lineEdit].Length - 1, 1);
                     }
+                    catch
+                    {
+                        // Do Nothing
+                    }
+                }else if (key != ConsoleKey.UpArrow && key != ConsoleKey.DownArrow)
+                {
                     lines[lineEdit] = lines[lineEdit] + consoleKey.KeyChar;
                 }
 
                 // RenderScreen
-                RenderScreen(lines.ToArray(), "Test", "Empty");
+                RenderScreen(lines.ToArray(), "Test", "Empty", lineEdit);
             } while(key != ConsoleKey.Escape);
         }
 
-        private static void RenderScreen(string[] chars, string fileName, string info)
+        private static void RenderScreen(string[] chars, string fileName, string info, int writeLine)
         {
             // Render The Screen
             Console.Clear();
 
+            int loop = 0;
             foreach(string line in chars)
             {
-                Console.WriteLine(line);
+                if(loop == writeLine)
+                {
+                    Console.WriteLine("> " + line);
+                }
+                else
+                {
+                    Console.WriteLine(line);
+                }
+                loop++;
             }
         }
     }
