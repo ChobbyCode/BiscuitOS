@@ -4,7 +4,7 @@ using BiscuitOS.Commands;
 using BiscuitOS.FileExplorer;
 using BiscuitOS.Account;
 using System.Threading;
-using BiscuitOS.Apps.TextEditor;
+using BiscuitOS;
 
 namespace BiscuitOS
 {
@@ -23,8 +23,7 @@ namespace BiscuitOS
 
             Console.Clear();
 
-            // Sign In
-
+            /*// Sign In
             Console.Write("Username: ");
             if(Console.ReadLine() != "admin")
             {
@@ -48,16 +47,18 @@ namespace BiscuitOS
 
             Console.WriteLine();
             Console.WriteLine("Copyright ChobbyCode 2023.");
-            Console.WriteLine();
+            Console.WriteLine();*/
         }
 
         protected override void Run()
         {
-            //Text Stuff
+            /*//Text Stuff
             Console.Write($"{FileMan.GetPath()}> ");
             var input = Console.ReadLine();
 
-            FileMan = commandManager.Command(input, FileMan);
+            FileMan = commandManager.Command(input, FileMan);*/
+
+            BConsole.StartBConsole();
         }
     }
 }
