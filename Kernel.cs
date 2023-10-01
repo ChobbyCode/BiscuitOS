@@ -7,6 +7,7 @@ using System.Threading;
 using BiscuitOS;
 using System.IO;
 using Cosmos.Core.IOGroup.Network;
+using BiscuitOS.Apps.TextEditor;
 
 namespace BiscuitOS
 {

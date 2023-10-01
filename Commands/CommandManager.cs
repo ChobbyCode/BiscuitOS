@@ -56,7 +56,7 @@ namespace BiscuitOS.Commands
                     BConsole.WriteLine();
                     BConsole.WriteLine("    Files:");
                     BConsole.WriteLine();
-                    BConsole.ForegroundColor = ConsoleColor.DarkGray;
+                    BConsole.ForegroundColor = ConsoleColor.White;
                     foreach (var file in files_list)
                     {
                         BConsole.WriteLine("    " + file);
@@ -65,7 +65,7 @@ namespace BiscuitOS.Commands
                     BConsole.WriteLine();
                     BConsole.WriteLine("    Directories:");
                     BConsole.WriteLine();
-                    BConsole.ForegroundColor = ConsoleColor.DarkGray;
+                    BConsole.ForegroundColor = ConsoleColor.White;
                     foreach (var directory in directory_list)
                     {
                         BConsole.WriteLine("    " + directory);

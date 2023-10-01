@@ -23,7 +23,7 @@ namespace BiscuitOS.FileExplorer
 
                     if (commandWord[3] != "")
                     {
-                        MakeFile(commandWord[3]);
+                        MakeFile(FileMan.GetPath() + commandWord[3]);
                     }
                     else
                     {
@@ -84,26 +84,15 @@ namespace BiscuitOS.FileExplorer
             CurrentDir = newPath;
         }
 
-        public static void MakeFile(string name)
+        public static void MakeFile(string path)
         {
-            string fileName = name;
-
-            if(File.Exists(CurrentDir + fileName))
-            {
-                BConsole.WriteLine();
-                BConsole.WriteLine("Error cannot create duplicate files of same name!");
-                BConsole.WriteLine();
-                return;
-            }
-
             try
             {
-                var FileStream = File.Create(CurrentDir + fileName);
-                BConsole.WriteLine($"Created File {CurrentDir + fileName}");
+                File.Create(path);
             }
             catch
             {
-                BConsole.WriteLine("Failed To Create File");
+                new BError($"Failed To Create File {path}");
             }
         }
 
@@ -142,7 +131,7 @@ namespace BiscuitOS.FileExplorer
                 }
                 catch
                 {
-                    new BError("Failed To Delete Directories");
+                    new BError($"Failed To Delete Directories {BasePath}");
                 }
             }
         }
@@ -159,7 +148,7 @@ namespace BiscuitOS.FileExplorer
                 }
                 catch
                 {
-                    new BError("Failed To Delete Directories");
+                    new BError($"Failed To Delete Directories {dir}");
                 }
             }
             foreach(string file in file_list)
@@ -170,7 +159,7 @@ namespace BiscuitOS.FileExplorer
                 }
                 catch
                 {
-                    new BError("Failed To Delete File");
+                    new BError($"Failed To Delete File {file}");
                 }
             }
         }

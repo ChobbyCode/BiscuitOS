@@ -9,6 +9,7 @@ namespace BiscuitOS
             ConsoleColor tmp = BConsole.ForegroundColor;
             BConsole.WriteLine(msg);
             BConsole.ForegroundColor = tmp;
+            BConsole.ReadLine();
         }
     }
 }
