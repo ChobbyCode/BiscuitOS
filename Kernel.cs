@@ -49,16 +49,17 @@ namespace BiscuitOS
             Console.WriteLine();
             Console.WriteLine("Copyright ChobbyCode 2023.");
             Console.WriteLine();
-
-            TestApp.Start();
         }
 
         protected override void Run()
         {
-            /*//Text Stuff
-            var input = BConsole.ReadLine($"{FileMan.GetPath()}> ");
+            //Text Stuff
+            /*var input = BConsole.ReadLine($"{FileMan.GetPath()}> ");
             BConsole.WriteLine($"{FileMan.GetPath()}> {input}");
             FileMan = commandManager.Command(input, FileMan);*/
+
+            string[] args = { };
+            TestApp.Start(args);
         }
     }
 }
