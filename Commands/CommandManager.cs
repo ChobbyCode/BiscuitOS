@@ -85,10 +85,11 @@ namespace BiscuitOS.Commands
                 }
                 else if (commandWord[0] == "rd")
                 {
-                    BConsole.Clear();
-                    BConsole.WriteLine();
-                    BConsole.WriteLine(CurrentFileMan.ReadFile(commandWord[1]));
-                    BConsole.WriteLine();
+                    string[] contents = File.ReadAllLines(CurrentFileMan.GetPath() + commandWord[1]);
+                    foreach(string line in contents)
+                    {
+                        BConsole.WriteLine(line);
+                    }
                     BConsole.ReadLine();
                     BConsole.Clear();
                 }

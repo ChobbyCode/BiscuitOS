@@ -10,6 +10,7 @@ namespace BiscuitOS
         public static ConsoleColor ForegroundColor = ConsoleColor.Black;
         public static ConsoleColor BackgroundColor = ConsoleColor.DarkCyan;
 
+        public static bool IsAppMode { get; set; } = false;
         private static List<string> consoleText = new List<string>();
 
         public static void WriteLine(string text)
@@ -75,6 +76,8 @@ namespace BiscuitOS
 
         private static void RenderBConsole(string[] lines, string actionBar, bool ObfuscateInput)
         {
+            if (IsAppMode) return;
+
             // Basic Setup Stuff
             List<string> output = new List<string>();
             output = lines.ToList();
