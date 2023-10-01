@@ -52,20 +52,25 @@ namespace BiscuitOS.Commands
                     var files_list = Directory.GetFiles(FileMan.GetPath());
                     var directory_list = Directory.GetDirectories(FileMan.GetPath());
 
+                    BConsole.ForegroundColor = ConsoleColor.Black;
                     BConsole.WriteLine();
                     BConsole.WriteLine("    Files:");
                     BConsole.WriteLine();
+                    BConsole.ForegroundColor = ConsoleColor.DarkGray;
                     foreach (var file in files_list)
                     {
                         BConsole.WriteLine("    " + file);
                     }
+                    BConsole.ForegroundColor = ConsoleColor.Black;
                     BConsole.WriteLine();
                     BConsole.WriteLine("    Directories:");
                     BConsole.WriteLine();
+                    BConsole.ForegroundColor = ConsoleColor.DarkGray;
                     foreach (var directory in directory_list)
                     {
                         BConsole.WriteLine("    " + directory);
                     }
+                    BConsole.ForegroundColor = ConsoleColor.Black;
                     BConsole.WriteLine();
                 }
                 else if (commandWord[0] == "cd")
