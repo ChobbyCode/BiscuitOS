@@ -5,7 +5,6 @@ using BiscuitOS.FileExplorer;
 using BiscuitOS.Account;
 using System.Threading;
 using BiscuitOS;
-using BiscuitOS.Apps.TestApp;
 
 namespace BiscuitOS
 {
@@ -54,12 +53,9 @@ namespace BiscuitOS
         protected override void Run()
         {
             //Text Stuff
-            /*var input = BConsole.ReadLine($"{FileMan.GetPath()}> ");
+            var input = BConsole.ReadLine($"{FileMan.GetPath()}> ");
             BConsole.WriteLine($"{FileMan.GetPath()}> {input}");
-            FileMan = commandManager.Command(input, FileMan);*/
-
-            string[] args = { };
-            TestApp.Start(args);
+            FileMan = commandManager.Command(input, FileMan);
         }
     }
 }

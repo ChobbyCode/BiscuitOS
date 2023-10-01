@@ -79,7 +79,6 @@ namespace BiscuitOS.FileExplorer
             string[] pathSplit = CurrentDir.Split(@"\");
             for (int i = 0; i < pathSplit.Length - 2; i++)
             {
-                BConsole.WriteLine(pathSplit[i]);
                 newPath = newPath + pathSplit[i] + @"\";
             }
             CurrentDir = newPath;

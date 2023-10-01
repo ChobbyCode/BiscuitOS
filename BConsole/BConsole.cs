@@ -10,7 +10,6 @@ namespace BiscuitOS
         public static ConsoleColor ForegroundColor = ConsoleColor.Black;
         public static ConsoleColor BackgroundColor = ConsoleColor.DarkCyan;
 
-        public static bool IsAppMode { get; set; } = false;
         private static List<string> consoleText = new List<string>();
 
         public static void WriteLine(string text)
@@ -28,6 +27,11 @@ namespace BiscuitOS
         {
             consoleText.RemoveRange(0, consoleText.Count);
             RenderBConsole(consoleText.ToArray(), "", false);
+        }
+
+        public static ConsoleKey ReadKey()
+        {
+            return InputManager.GetKey();
         }
 
         public static string ReadLine()
@@ -76,8 +80,6 @@ namespace BiscuitOS
 
         private static void RenderBConsole(string[] lines, string actionBar, bool ObfuscateInput)
         {
-            if (IsAppMode) return;
-
             // Basic Setup Stuff
             List<string> output = new List<string>();
             output = lines.ToList();
@@ -96,6 +98,8 @@ namespace BiscuitOS
                     output.RemoveAt(0);
                 }
             }
+
+            output.Insert(0, actionBar);
 
             Console.ForegroundColor = ForegroundColor;
             Console.BackgroundColor = BackgroundColor;

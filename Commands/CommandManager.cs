@@ -48,8 +48,6 @@ namespace BiscuitOS.Commands
                 }
                 else if (commandWord[0] == "ls")
                 {
-                    BConsole.WriteLine(CurrentFileMan.GetPath());
-
                     // List Current Dir Info
                     var files_list = Directory.GetFiles(CurrentFileMan.GetPath());
                     var directory_list = Directory.GetDirectories(CurrentFileMan.GetPath());
