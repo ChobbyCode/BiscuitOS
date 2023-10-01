@@ -96,7 +96,7 @@ namespace BiscuitOS.Apps.TextEditor
             {
                 if(loop == writeLine)
                 {
-                    Console.WriteLine("> " + line + "|");
+                    Console.WriteLine("> " + line + "|<");
                 }
                 else
                 {

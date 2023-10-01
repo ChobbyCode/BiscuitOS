@@ -95,16 +95,16 @@ namespace BiscuitOS
             List<string> output = new List<string>();
             output = lines.ToList();
 
-            if(output.Count < 23) {
-                while(output.Count < 23)
+            if(output.Count < 22) {
+                while(output.Count < 22)
                 {
                     output.Add(String.Empty);
                 }
             }
 
-            if (output.Count > 23)
+            if (output.Count > 22)
             {
-                while (output.Count > 23)
+                while (output.Count > 22)
                 {
                     output.RemoveAt(0);
                 }
