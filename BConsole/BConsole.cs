@@ -15,37 +15,48 @@ namespace BiscuitOS
         public static void WriteLine(string text)
         {
             consoleText.Add(text);
-            RenderBConsole(consoleText.ToArray(), "", false);
+            RenderBConsole(consoleText.ToArray(), String.Empty, "", false);
         }
         public static void WriteLine()
         {
             consoleText.Add(String.Empty);
-            RenderBConsole(consoleText.ToArray(), "", false);
+            RenderBConsole(consoleText.ToArray(), String.Empty, "", false);
         }
 
+        public static void Refresh()
+        {
+            RenderBConsole(consoleText.ToArray(), String.Empty, "", false);
+        }
         public static void Clear()
         {
             consoleText.RemoveRange(0, consoleText.Count);
-            RenderBConsole(consoleText.ToArray(), "", false);
+            RenderBConsole(consoleText.ToArray(), String.Empty, "", false);
+        }
+
+        public static string ReadRedacted()
+        {
+            return Read("", true);
+        }
+        public static string ReadRedacted(string msg)
+        {
+            return Read(msg, true);
         }
 
         public static ConsoleKey ReadKey()
         {
             return InputManager.GetKey();
         }
-
         public static string ReadLine()
         {
-            return Read("");
+            return Read("", false);
         }
-
         public static string ReadLine(string msg)
         {
-            RenderBConsole(consoleText.ToArray(), msg, false);
-            return Read(msg);
+            RenderBConsole(consoleText.ToArray(), String.Empty, msg, false);
+            return Read(msg, false);
         }
 
-        private static string Read(string msg)
+        private static string Read(string msg, bool redactInfo)
         {
             string line = String.Empty;
 
@@ -73,33 +84,31 @@ namespace BiscuitOS
                         }
                     }
                 }
-                RenderBConsole(consoleText.ToArray(), msg + line, false);
+                RenderBConsole(consoleText.ToArray(), msg, line, redactInfo);
             } while (key != ConsoleKey.Enter);
             return line;
         }
 
-        private static void RenderBConsole(string[] lines, string actionBar, bool ObfuscateInput)
+        private static void RenderBConsole(string[] lines, string msg, string actionBar, bool ObfuscateInput)
         {
             // Basic Setup Stuff
             List<string> output = new List<string>();
             output = lines.ToList();
 
-            if(output.Count < 22) {
-                while(output.Count < 22)
+            if(output.Count < 23) {
+                while(output.Count < 23)
                 {
                     output.Add(String.Empty);
                 }
             }
 
-            if (output.Count > 22)
+            if (output.Count > 23)
             {
-                while (output.Count > 22)
+                while (output.Count > 23)
                 {
                     output.RemoveAt(0);
                 }
             }
-
-            output.Insert(0, actionBar);
 
             Console.ForegroundColor = ForegroundColor;
             Console.BackgroundColor = BackgroundColor;
@@ -115,6 +124,7 @@ namespace BiscuitOS
 
             if (ObfuscateInput)
             {
+                Console.Write(msg);
                 foreach (char let in actionBar)
                 {
                     Console.Write("*");
@@ -123,7 +133,7 @@ namespace BiscuitOS
             }
             else
             {
-                Console.WriteLine(actionBar);
+                Console.WriteLine(msg + actionBar);
             }
 
         }

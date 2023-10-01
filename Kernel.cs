@@ -21,33 +21,16 @@ namespace BiscuitOS
 
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
-            Console.Clear();
+            BConsole.Refresh();
 
-            // Sign In
-            Console.Write("Username: ");
-            if(Console.ReadLine() != "admin")
-            {
-                commandManager.Command("exit", FileMan);
-            }
-
-            AccInputMan accInputMan = new AccInputMan();
-
-            if(accInputMan.ObfuscateInput("Password: ") != "password") 
-            {
-                commandManager.Command("exit", FileMan);
-            }
-
-            Console.Clear();
-            Console.WriteLine("Signing In..");
-            Thread.Sleep(1000);
-            Console.Clear();
+            BConsole.WriteLine(BConsole.ReadRedacted("Password: "));
 
             var available_space = fs.GetAvailableFreeSpace(@"0:\");
-            Console.WriteLine("Available Free Space: " + available_space);
+            BConsole.WriteLine("Available Free Space: " + available_space);
 
-            Console.WriteLine();
-            Console.WriteLine("Copyright ChobbyCode 2023.");
-            Console.WriteLine();
+            BConsole.WriteLine();
+            BConsole.WriteLine("Copyright ChobbyCode 2023.");
+            BConsole.WriteLine();
         }
 
         protected override void Run()
