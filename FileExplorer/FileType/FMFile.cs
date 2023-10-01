@@ -8,10 +8,8 @@ namespace BiscuitOS.FileExecutable
 {
     public class FMFile
     {
-        public void RunFile(string path, FileMan CurrentFileMan)
+        public void RunFile(string path)
         {
-            // Create Command Manager
-            CommandManager commandManager = new CommandManager();
 
             // Convert To Array
             try
@@ -23,7 +21,7 @@ namespace BiscuitOS.FileExecutable
 
                 foreach (string line in readFile)
                 {
-                    commandManager.Command(line, CurrentFileMan);
+                    CommandManager.Command(line);
                     //.WriteLine($"Doing Command {line}");
                 }
             }

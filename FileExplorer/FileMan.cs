@@ -10,10 +10,10 @@ namespace BiscuitOS.FileExplorer
 {
     public class FileMan
     {
-        string CurrentDir = @"0:\";
+        static string CurrentDir = @"0:\";
 
 
-        public void ParseFileCommand(string[] commandWord)
+        public static void ParseFileCommand(string[] commandWord)
         {
             if (commandWord[1] == "new")
             {
@@ -59,7 +59,7 @@ namespace BiscuitOS.FileExplorer
             }else if (commandWord[1] == "run")
             {
                 FMFile fmFile = new FMFile();
-                fmFile.RunFile(GetPath() + commandWord[2], this);
+                fmFile.RunFile(GetPath() + commandWord[2]);
             }
             else
             {
@@ -67,12 +67,12 @@ namespace BiscuitOS.FileExplorer
             }
         }
 
-        public void AddDir(string folder)
+        public static void AddDir(string folder)
         {
             CurrentDir = CurrentDir + folder + @"\";
         }
 
-        public void BackDir()
+        public static void BackDir()
         {
             var newPath = "";
 
@@ -84,7 +84,7 @@ namespace BiscuitOS.FileExplorer
             CurrentDir = newPath;
         }
 
-        public void MakeFile(string name)
+        public static void MakeFile(string name)
         {
             string fileName = name;
 
@@ -107,14 +107,81 @@ namespace BiscuitOS.FileExplorer
             }
         }
 
-        public string ReadFile(string fileName)
+        public static void MakeDir(string Path)
+        {
+            string[] directories = Path.Split(@"\");
+
+            string fileConstructor = String.Empty;
+            foreach(string dir in directories)
+            {
+                fileConstructor += @$"{dir}\";
+                if(dir != "0:" && dir != "")
+                {
+                    if (!Directory.Exists(dir))
+                    {
+                        try
+                        {
+                            Directory.CreateDirectory(fileConstructor);
+                        }
+                        catch
+                        {
+                            new BError("Failed To Create Directory");
+                        }
+                    }
+                }
+            }
+        }
+
+        public static void DeleteDir(string BasePath)
+        {
+            if (BasePath != @"0:\")
+            {
+                try
+                {
+                    Directory.Delete(BasePath, true);
+                }
+                catch
+                {
+                    new BError("Failed To Delete Directories");
+                }
+            }
+        }
+
+        public static void DeleteIn(string BasePath)
+        {
+            var dir_list = Directory.GetDirectories(BasePath);
+            var file_list = Directory.GetFiles(BasePath);
+            foreach(var dir in dir_list)
+            {
+                try
+                {
+                    Directory.Delete(BasePath + $@"\{dir}", true);
+                }
+                catch
+                {
+                    new BError("Failed To Delete Directories");
+                }
+            }
+            foreach(string file in file_list)
+            {
+                try
+                {
+                    File.Delete(BasePath + $@"\{file}");
+                }
+                catch
+                {
+                    new BError("Failed To Delete File");
+                }
+            }
+        }
+
+        public static string ReadFile(string fileName)
         {
             var fileContents = File.ReadAllText(GetPath() + fileName);
-
             return fileContents;
         }
 
-        public string GetPath()
+        public static string GetPath()
         {
             return CurrentDir;
         }

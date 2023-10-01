@@ -10,7 +10,7 @@ namespace BiscuitOS.Commands
 {
     public class CommandManager
     {
-        public FileMan Command(string cmd, FileMan CurrentFileMan)
+        public static void Command(string cmd)
         {
             try
             {
@@ -49,8 +49,8 @@ namespace BiscuitOS.Commands
                 else if (commandWord[0] == "ls")
                 {
                     // List Current Dir Info
-                    var files_list = Directory.GetFiles(CurrentFileMan.GetPath());
-                    var directory_list = Directory.GetDirectories(CurrentFileMan.GetPath());
+                    var files_list = Directory.GetFiles(FileMan.GetPath());
+                    var directory_list = Directory.GetDirectories(FileMan.GetPath());
 
                     BConsole.WriteLine();
                     BConsole.WriteLine("    Files:");
@@ -70,20 +70,20 @@ namespace BiscuitOS.Commands
                 }
                 else if (commandWord[0] == "cd")
                 {
-                    CurrentFileMan.AddDir(commandWord[1]);
+                    FileMan.AddDir(commandWord[1]);
                 }
                 else if (commandWord[0] == "bkdir")
                 {
-                    CurrentFileMan.BackDir();
+                    FileMan.BackDir();
                 }
                 else if (commandWord[0] == "fm")
                 {
                     // Access file man
-                    CurrentFileMan.ParseFileCommand(commandWord);
+                    FileMan.ParseFileCommand(commandWord);
                 }
                 else if (commandWord[0] == "rd")
                 {
-                    string[] contents = File.ReadAllLines(CurrentFileMan.GetPath() + commandWord[1]);
+                    string[] contents = File.ReadAllLines(FileMan.GetPath() + commandWord[1]);
                     foreach(string line in contents)
                     {
                         BConsole.WriteLine(line);
@@ -93,12 +93,12 @@ namespace BiscuitOS.Commands
                 }
                 else if (commandWord[0] == "miv")
                 {
-                    string[] args = { CurrentFileMan.GetPath() + commandWord[1] };
+                    string[] args = { FileMan.GetPath() + commandWord[1] };
                     MIV.StartMIV(args);
                 }
                 else if (commandWord[0] == "open")
                 {
-                    string[] args = { CurrentFileMan.GetPath() + commandWord[1] };
+                    string[] args = { FileMan.GetPath() + commandWord[1] };
                     TextEditor.StartTextEditor(args);
                 }
                 else if (commandWord[0] == "print")
@@ -107,8 +107,7 @@ namespace BiscuitOS.Commands
                 }
                 else if (commandWord[0] == "if")
                 {
-                    // If statements
-                    CurrentFileMan = IfStatement(commandWord, CurrentFileMan);
+                    
                 }
                 else
                 {
@@ -120,10 +119,8 @@ namespace BiscuitOS.Commands
             }
             catch
             {
-                return CurrentFileMan;
                 //BConsole.WriteLine("Please specify a component after command word.");
             }
-            return CurrentFileMan;
         }
 
         public FileMan IfStatement(string[] commandWord, FileMan CurrentFileMan)
