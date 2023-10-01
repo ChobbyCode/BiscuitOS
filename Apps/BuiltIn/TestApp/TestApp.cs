@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BiscuitOS.Apps.TestApp
 {
     public class TestApp
     {
-        static ConsoleApplication consoleApplication;
+        static ConsoleApplication consoleApp = new ConsoleApplication();
 
         public static void Start()
         {
-            consoleApplication = new ConsoleApplication(true);
-            //BConsole.WriteLine("Simulated: 'Started Application'");
+            consoleApp.Start();
+
+            consoleApp.onStartUp += (s, args) =>
+            {
+                BConsole.WriteLine("Started");
+            };
         }
     }
 }
