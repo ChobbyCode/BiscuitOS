@@ -31,7 +31,7 @@ namespace BiscuitOS
 
         public static void SystemIOError()
         {
-            PrintError("A System IO Errro Occured");
+            PrintError("A System IO Error Occured");
         }
 
         public static void CPUHaltError()
