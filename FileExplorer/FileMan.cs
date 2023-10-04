@@ -8,7 +8,6 @@ namespace BiscuitOS.FileExplorer
     {
         static string CurrentDir = @"0:\";
 
-
         public static void ParseFileCommand(string[] commandWord)
         {
             if (commandWord[1] == "new")
@@ -122,9 +121,9 @@ namespace BiscuitOS.FileExplorer
                 }
             }else if (commandWord[1] == "del")
             {
-                if (commandWord[2] == "fm" || commandWord[2] == "file")
+                if (commandWord[2] == "fl" || commandWord[2] == "file")
                 {
-                    if (isRelative(commandWord[2]))
+                    if (isRelative(commandWord[3]))
                     {
                         try
                         {
@@ -140,6 +139,30 @@ namespace BiscuitOS.FileExplorer
                         try
                         {
                             File.Delete(commandWord[3]);
+                        }
+                        catch
+                        {
+                            BError.SystemIOError();
+                        }
+                    }
+                }else if (commandWord[2] == "dir" || commandWord[2] == "directory")
+                {
+                    if (isRelative(commandWord[3]))
+                    {
+                        try
+                        {
+                            Directory.Delete(GetPath() + commandWord[3]);
+                        }
+                        catch
+                        {
+                            BError.SystemIOError();
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            Directory.Delete(commandWord[3]);
                         }
                         catch
                         {
