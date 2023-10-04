@@ -1,12 +1,6 @@
 ﻿using BiscuitOS.Apps.TextEditor;
-using BiscuitOS.Commands;
 using BiscuitOS.FileExecutable;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BiscuitOS.FileExplorer
 {
@@ -73,6 +67,43 @@ namespace BiscuitOS.FileExplorer
                             TextEditor.StartTextEditor(args);
                         }
                     }
+                }else if (commandWord[2] == "dir" || commandWord[2] == "directory")
+                {
+                    if (isRelative(commandWord[3]))
+                    {
+                        try
+                        {
+                            Directory.CreateDirectory(GetPath() + commandWord[3]);
+                        }
+                        catch
+                        {
+                            BError.SystemIOError();
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            Directory.CreateDirectory(commandWord[3]);
+                        }
+                        catch
+                        {
+                            BError.SystemIOError();
+                        }
+                    }
+
+                    if (commandWord[4] == "-r")
+                    {
+                        // Open To Directory
+                        if (isRelative(commandWord[3]))
+                        {
+                            CurrentDir = GetPath() + commandWord[3];
+                        }
+                        else
+                        {
+                            CurrentDir = commandWord[3];
+                        }
+                    }
                 }
                 else
                 {
@@ -91,14 +122,30 @@ namespace BiscuitOS.FileExplorer
                 }
             }else if (commandWord[1] == "del")
             {
-                try
+                if (commandWord[2] == "fm" || commandWord[2] == "file")
                 {
-                    File.Delete(GetPath() + commandWord[2]);
-                    BConsole.WriteLine("Deleted File.");
-                }
-                catch
-                {
-                    BConsole.WriteLine("Failed to delete file.");
+                    if (isRelative(commandWord[2]))
+                    {
+                        try
+                        {
+                            File.Delete(GetPath() + commandWord[3]);
+                        }
+                        catch
+                        {
+                            BError.SystemIOError();
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            File.Delete(commandWord[3]);
+                        }
+                        catch
+                        {
+                            BError.SystemIOError();
+                        }
+                    }
                 }
             }else if (commandWord[1] == "run")
             {
