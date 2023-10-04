@@ -28,16 +28,23 @@ namespace BiscuitOS
             BConsole.WriteLine();
             BConsole.WriteLine("Copyright ChobbyCode 2023.");
             BConsole.WriteLine();
+
+            try
+            {
+                File.Create(@"0:\bob.txt");
+            }
+            catch
+            {
+                BError.SystemDeleteError();
+            }
         }
 
         protected override void Run()
         {
-            /*//Text Stuff
+            //Text Stuff
             var input = BConsole.ReadLine($"{FileMan.GetPath()}> ");
             BConsole.WriteLine($"{FileMan.GetPath()}> {input}");
-            CommandManager.Command(input);*/
-
-            FileMan.MakeDir(@"0:\Biscuit\System\");
+            CommandManager.Command(input);
         }
     }
 }

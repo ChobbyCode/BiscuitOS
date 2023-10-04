@@ -23,7 +23,29 @@ namespace BiscuitOS.FileExplorer
 
                     if (commandWord[3] != "")
                     {
-                        MakeFile(FileMan.GetPath() + commandWord[3]);
+                        if (isRelative(commandWord[3]))
+                        {
+                            try
+                            {
+                                File.Create(GetPath() + commandWord[3]);
+                            }
+                            catch
+                            {
+                                BError.SystemIOError();
+                            }
+
+                            return;
+                        }
+
+                        try
+                        {
+                            File.Create(commandWord[3]);
+                        }
+                        catch
+                        {
+                            BError.SystemIOError();
+                        }
+                        return;
                     }
                     else
                     {
@@ -82,76 +104,6 @@ namespace BiscuitOS.FileExplorer
                 newPath = newPath + pathSplit[i] + @"\";
             }
             CurrentDir = newPath;
-        }
-
-        public static void MakeFile(string path)
-        {
-            if (isRelative(path))
-            {
-                // Basically construct it with the current open path
-                path = GetPath() + path;
-                try
-                {
-                    File.Create(path);
-                }
-                catch
-                {
-                    BError.SystemIOError();
-                }
-
-                return;
-            }
-            //else
-
-            try
-            {
-                File.Create(path);
-            }
-            catch
-            {
-                BError.SystemIOError();
-            }
-        }
-
-        public static void MakeDir(string path)
-        {
-            path += @"\";
-            if (isRelative(path))
-            {
-                // Basically construct it with the current open path
-                path = GetPath() + path;
-                try
-                {
-                    BConsole.WriteLine(path);
-                }
-                catch
-                {
-                    BError.SystemIOError();
-                }
-
-                return;
-            }
-            //else
-
-            try
-            {
-                //Directory.CreateDirectory(path);
-                BConsole.WriteLine(path);
-            }
-            catch
-            {
-                BError.SystemIOError();
-            }
-        }
-
-        public static void DeleteDir(string BasePath)
-        {
-            
-        }
-
-        public static void DeleteIn(string BasePath)
-        {
-            
         }
 
         public static string ReadFile(string fileName)
