@@ -86,82 +86,72 @@ namespace BiscuitOS.FileExplorer
 
         public static void MakeFile(string path)
         {
+            if (isRelative(path))
+            {
+                // Basically construct it with the current open path
+                path = GetPath() + path;
+                try
+                {
+                    File.Create(path);
+                }
+                catch
+                {
+                    BError.SystemIOError();
+                }
+
+                return;
+            }
+            //else
+
             try
             {
                 File.Create(path);
             }
             catch
             {
-                new BError($"Failed To Create File {path}");
+                BError.SystemIOError();
             }
         }
 
-        public static void MakeDir(string Path)
+        public static void MakeDir(string path)
         {
-            string[] directories = Path.Split(@"\");
-
-            string fileConstructor = String.Empty;
-            foreach(string dir in directories)
+            path += @"\";
+            if (isRelative(path))
             {
-                fileConstructor += @$"{dir}\";
-                if(dir != "0:" && dir != "")
+                // Basically construct it with the current open path
+                path = GetPath() + path;
+                try
                 {
-                    if (!Directory.Exists(dir))
-                    {
-                        try
-                        {
-                            Directory.CreateDirectory(fileConstructor);
-                        }
-                        catch
-                        {
-                            new BError("Failed To Create Directory");
-                        }
-                    }
+                    BConsole.WriteLine(path);
                 }
+                catch
+                {
+                    BError.SystemIOError();
+                }
+
+                return;
+            }
+            //else
+
+            try
+            {
+                //Directory.CreateDirectory(path);
+                BConsole.WriteLine(path);
+            }
+            catch
+            {
+                BError.SystemIOError();
             }
         }
 
         public static void DeleteDir(string BasePath)
         {
-            if (BasePath != @"0:\")
-            {
-                try
-                {
-                    Directory.Delete(BasePath, true);
-                }
-                catch
-                {
-                    new BError($"Failed To Delete Directories {BasePath}");
-                }
-            }
+            
         }
 
         public static void DeleteIn(string BasePath)
         {
-            var dir_list = Directory.GetDirectories(BasePath);
-            var file_list = Directory.GetFiles(BasePath);
-            foreach(var dir in dir_list)
-            {
-                try
-                {
-                    Directory.Delete(BasePath + $@"\{dir}", true);
-                }
-                catch
-                {
-                    new BError($"Failed To Delete Directories {dir}");
-                }
-            }
-            foreach(string file in file_list)
-            {
-                try
-                {
-                    File.Delete(BasePath + $@"\{file}");
-                }
-                catch
-                {
-                    new BError($"Failed To Delete File {file}");
-                }
-            }
+            
         }
 
         public static string ReadFile(string fileName)
@@ -173,6 +163,25 @@ namespace BiscuitOS.FileExplorer
         public static string GetPath()
         {
             return CurrentDir;
+        }
+
+        private static bool isRelative(string path)
+        {
+            bool relative = true;
+            path += @"\";
+            try
+            {
+                string[] pathSplit = path.Split(@"\");
+                if (pathSplit[0] == "0:")
+                {
+                    relative = false;
+                }
+            }
+            catch
+            {
+                BError.ParsingError();
+            }
+            return relative;
         }
     }
 }

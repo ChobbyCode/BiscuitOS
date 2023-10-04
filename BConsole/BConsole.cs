@@ -58,6 +58,7 @@ namespace BiscuitOS
 
         private static string Read(string msg, bool redactInfo)
         {
+            RenderBConsole(consoleText.ToArray(), msg, "", redactInfo);
             string line = String.Empty;
 
             ConsoleKey key;

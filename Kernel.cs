@@ -22,22 +22,22 @@ namespace BiscuitOS
 
             BConsole.Refresh();
 
-            /*var available_space = fs.GetAvailableFreeSpace(@"0:\");
+            var available_space = fs.GetAvailableFreeSpace(@"0:\");
             BConsole.WriteLine("Available Free Space: " + available_space);
 
             BConsole.WriteLine();
             BConsole.WriteLine("Copyright ChobbyCode 2023.");
-            BConsole.WriteLine();*/
-
-            Installer.Installer.StartInstall();
+            BConsole.WriteLine();
         }
 
         protected override void Run()
         {
-            //Text Stuff
+            /*//Text Stuff
             var input = BConsole.ReadLine($"{FileMan.GetPath()}> ");
             BConsole.WriteLine($"{FileMan.GetPath()}> {input}");
-            CommandManager.Command(input);
+            CommandManager.Command(input);*/
+
+            FileMan.MakeDir(@"0:\Biscuit\System\");
         }
     }
 }
