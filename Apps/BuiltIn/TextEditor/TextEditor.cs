@@ -49,11 +49,11 @@ namespace BiscuitOS.Apps.TextEditor
                 {
                     lineEdit++;
                 }
-                if(key == ConsoleKey.LeftArrow && letterEdit != 0)
+                if(key == ConsoleKey.LeftArrow && letterEdit != 1)
                 {
                     letterEdit--;
                 }
-                if(key == ConsoleKey.RightArrow && letterEdit != lines[lineEdit].Length)
+                if(key == ConsoleKey.RightArrow && letterEdit != lines[lineEdit].Length + 1)
                 {
                     letterEdit++;
                 }
@@ -63,7 +63,8 @@ namespace BiscuitOS.Apps.TextEditor
                     // Delete Last Char
                     try
                     {
-                        lines[lineEdit] = lines[lineEdit].Remove(letterEdit, 1);
+                        lines[lineEdit] = lines[lineEdit].Remove(letterEdit - 1, 1);
+                        letterEdit--;
                     }
                     catch
                     {
@@ -85,7 +86,15 @@ namespace BiscuitOS.Apps.TextEditor
                 else if (key != ConsoleKey.UpArrow && key != ConsoleKey.DownArrow && key != ConsoleKey.LeftArrow && key != ConsoleKey.RightArrow)
                 {
                     // Insert 
-                    lines[lineEdit] = lines[lineEdit].Insert(letterEdit, consoleKey.KeyChar.ToString());
+                    if(letterEdit >= lines[lineEdit].Length)
+                    {
+                        lines[lineEdit] = lines[lineEdit] + consoleKey.KeyChar;
+                    }
+                    else
+                    {
+                        lines[lineEdit] = lines[lineEdit].Insert(letterEdit, consoleKey.KeyChar.ToString());
+                    }
+                    letterEdit++;
                 }
 
                 // RenderScreen
@@ -102,7 +111,7 @@ namespace BiscuitOS.Apps.TextEditor
             List<String> renderLines = lines.ToList();
             // Add Edit Line Notation
             renderLines[writeLine] = renderLines[writeLine].Insert(0, ">");
-            renderLines[writeLine] = renderLines[writeLine].Insert(editLetter, "|");
+            renderLines[writeLine] = renderLines[writeLine].Insert(editLetter, "|<");
 
             int loop = 0;
             foreach(string line in renderLines)
