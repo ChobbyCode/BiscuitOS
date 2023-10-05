@@ -1,9 +1,7 @@
 ﻿using System.IO;
 using System;
-using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
-using Cosmos.Core;
 
 namespace BiscuitOS.Apps.TextEditor
 {
@@ -14,7 +12,7 @@ namespace BiscuitOS.Apps.TextEditor
             // Start The Editor
             string[] file = File.ReadAllLines(filePath[0]);
 
-            RenderScreen(file.ToArray(), "Win", "Empty", 0);
+            RenderScreen(file.ToArray(), 0, 0);
             TextEditorM(file, filePath[0]);
         }
 
@@ -31,6 +29,7 @@ namespace BiscuitOS.Apps.TextEditor
             }
 
             int lineEdit = 0; // The Line We Are Editting
+            int letterEdit = 0; // The letter We Are Editting
             
 
             ConsoleKey key;
@@ -50,13 +49,21 @@ namespace BiscuitOS.Apps.TextEditor
                 {
                     lineEdit++;
                 }
+                if(key == ConsoleKey.LeftArrow && letterEdit != 0)
+                {
+                    letterEdit--;
+                }
+                if(key == ConsoleKey.RightArrow && letterEdit != lines[lineEdit].Length)
+                {
+                    letterEdit++;
+                }
 
                 if (key == ConsoleKey.Backspace)
                 {
                     // Delete Last Char
                     try
                     {
-                        lines[lineEdit] = lines[lineEdit].Remove(lines[lineEdit].Length - 1, 1);
+                        lines[lineEdit] = lines[lineEdit].Remove(letterEdit, 1);
                     }
                     catch
                     {
@@ -75,33 +82,32 @@ namespace BiscuitOS.Apps.TextEditor
                         key = ConsoleKey.Escape;
                     }
                 }
-                else if (key != ConsoleKey.UpArrow && key != ConsoleKey.DownArrow)
+                else if (key != ConsoleKey.UpArrow && key != ConsoleKey.DownArrow && key != ConsoleKey.LeftArrow && key != ConsoleKey.RightArrow)
                 {
-                    lines[lineEdit] = lines[lineEdit] + consoleKey.KeyChar;
+                    // Insert 
+                    lines[lineEdit] = lines[lineEdit].Insert(letterEdit, consoleKey.KeyChar.ToString());
                 }
 
                 // RenderScreen
-                RenderScreen(lines.ToArray(), "Test", "Empty", lineEdit);
+                RenderScreen(lines.ToArray(), lineEdit, letterEdit);
             } while(key != ConsoleKey.Escape);
             Console.Clear();
         }
 
-        private static void RenderScreen(string[] chars, string fileName, string info, int writeLine)
+        private static void RenderScreen(string[] lines, int writeLine, int editLetter)
         {
             // Render The Screen
             Console.Clear();
 
+            List<String> renderLines = lines.ToList();
+            // Add Edit Line Notation
+            renderLines[writeLine] = renderLines[writeLine].Insert(0, ">");
+            renderLines[writeLine] = renderLines[writeLine].Insert(editLetter, "|");
+
             int loop = 0;
-            foreach(string line in chars)
+            foreach(string line in renderLines)
             {
-                if(loop == writeLine)
-                {
-                    Console.WriteLine("> " + line + "|<");
-                }
-                else
-                {
-                    Console.WriteLine(line);
-                }
+                Console.WriteLine(line);
                 loop++;
             }
         }
