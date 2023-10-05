@@ -27,9 +27,13 @@ namespace BiscuitOS.Apps.TextEditor
                     lines.Add("");
                 }
             }
+            for(int i = 0; i <  lines.Count; i++)
+            {
+                lines[i] += " ";
+            }
 
             int lineEdit = 0; // The Line We Are Editting
-            int letterEdit = 0; // The letter We Are Editting
+            int letterEdit = 1; // The letter We Are Editting
             
 
             ConsoleKey key;
@@ -49,11 +53,11 @@ namespace BiscuitOS.Apps.TextEditor
                 {
                     lineEdit++;
                 }
-                if(key == ConsoleKey.LeftArrow && letterEdit != 1)
+                if(key == ConsoleKey.LeftArrow && letterEdit !>= 1)
                 {
                     letterEdit--;
                 }
-                if(key == ConsoleKey.RightArrow && letterEdit != lines[lineEdit].Length + 1)
+                if(key == ConsoleKey.RightArrow && letterEdit < lines[lineEdit].Length)
                 {
                     letterEdit++;
                 }
@@ -63,7 +67,7 @@ namespace BiscuitOS.Apps.TextEditor
                     // Delete Last Char
                     try
                     {
-                        lines[lineEdit] = lines[lineEdit].Remove(letterEdit - 1, 1);
+                        lines[lineEdit] = lines[lineEdit].Remove(letterEdit - 2, 1);
                         letterEdit--;
                     }
                     catch
@@ -86,14 +90,8 @@ namespace BiscuitOS.Apps.TextEditor
                 else if (key != ConsoleKey.UpArrow && key != ConsoleKey.DownArrow && key != ConsoleKey.LeftArrow && key != ConsoleKey.RightArrow)
                 {
                     // Insert 
-                    if(letterEdit >= lines[lineEdit].Length)
-                    {
-                        lines[lineEdit] = lines[lineEdit] + consoleKey.KeyChar;
-                    }
-                    else
-                    {
-                        lines[lineEdit] = lines[lineEdit].Insert(letterEdit, consoleKey.KeyChar.ToString());
-                    }
+
+                    lines[lineEdit] = lines[lineEdit].Insert(letterEdit - 1, consoleKey.KeyChar.ToString());
                     letterEdit++;
                 }
 
