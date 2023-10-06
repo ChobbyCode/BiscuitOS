@@ -42,6 +42,8 @@ namespace BiscuitOS.Graphics
             // Update The Canvas
             Kernel.canvas.Display();
 
+            // Reset all Lists
+            windows = new List<Window>();
         }
 
         private static void RenderMouse(uint mouseX, uint mouseY)
@@ -61,7 +63,10 @@ namespace BiscuitOS.Graphics
             }
         }
 
-        public static void AddWindow(Window Window)
+        /// <summary>
+        /// Adds a window to the render pipeline. Must be readded every render.
+        /// </summary>
+        public static void AddRenderWindow(Window Window)
         {
             windows.Add(Window);
         }
