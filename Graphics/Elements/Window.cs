@@ -5,7 +5,7 @@ namespace BiscuitOS.Graphics
     {
         public string WindowName { get; private set; }
         private Rectangle border;
-        public Window(string Name, int width = 420, int height = 420)
+        public Window(string Name = "New Empty Window", int width = 420, int height = 420)
         {
             // Init Border
             WindowName = Name;

@@ -17,6 +17,8 @@ namespace BiscuitOS
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
             Renderer.StartGUIMode();
+
+            Renderer.AddWindow(new Window("New Empty Window", 420, 420));
         }
 
         protected override void Run()
