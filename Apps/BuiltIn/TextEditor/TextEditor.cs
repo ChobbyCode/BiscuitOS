@@ -12,7 +12,7 @@ namespace BiscuitOS.Apps.TextEditor
             // Start The Editor
             string[] file = File.ReadAllLines(filePath[0]);
 
-            RenderScreen(file.ToArray(), 0, 0);
+            RenderScreen(file.ToArray(), 0, 1);
             TextEditorM(file, filePath[0]);
         }
 
@@ -48,10 +48,18 @@ namespace BiscuitOS.Apps.TextEditor
                 if(key == ConsoleKey.UpArrow && lineEdit != 0)
                 {
                     lineEdit--;
+                    if (lines[lineEdit].Length < letterEdit)
+                    {
+                        letterEdit = lines[lineEdit].Length;
+                    }
                 }
                 if(key == ConsoleKey.DownArrow && lineEdit != lines.Count() - 1)
                 {
                     lineEdit++;
+                    if (lines[lineEdit].Length < letterEdit)
+                    {
+                        letterEdit = lines[lineEdit].Length;
+                    }
                 }
                 if(key == ConsoleKey.LeftArrow && letterEdit !>= 1)
                 {
@@ -90,9 +98,15 @@ namespace BiscuitOS.Apps.TextEditor
                 else if (key != ConsoleKey.UpArrow && key != ConsoleKey.DownArrow && key != ConsoleKey.LeftArrow && key != ConsoleKey.RightArrow)
                 {
                     // Insert 
+                    try
+                    {
+                        lines[lineEdit] = lines[lineEdit].Insert(letterEdit - 1, consoleKey.KeyChar.ToString());
+                        letterEdit++;
+                    }
+                    catch
+                    {
 
-                    lines[lineEdit] = lines[lineEdit].Insert(letterEdit - 1, consoleKey.KeyChar.ToString());
-                    letterEdit++;
+                    }
                 }
 
                 // RenderScreen
