@@ -53,7 +53,7 @@ namespace BiscuitOS.Apps.TextEditor
                         letterEdit = lines[lineEdit].Length;
                     }
                 }
-                if(key == ConsoleKey.DownArrow && lineEdit != lines.Count() - 1)
+                if(key == ConsoleKey.DownArrow || key == ConsoleKey.Enter && lineEdit != lines.Count() - 1)
                 {
                     lineEdit++;
                     if (lines[lineEdit].Length < letterEdit)
