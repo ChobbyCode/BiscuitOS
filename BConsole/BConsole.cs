@@ -10,6 +10,7 @@ namespace BiscuitOS
         public static ConsoleColor BackgroundColor = ConsoleColor.DarkCyan;
 
         private static List<string> consoleText = new List<string>();
+        private static string prevInput = String.Empty;
 
         public static void WriteLine(string text)
         {
@@ -82,10 +83,17 @@ namespace BiscuitOS
                         {
                             // Do nothing
                         }
+                    }else if(key == ConsoleKey.UpArrow || key == ConsoleKey.DownArrow)
+                    {
+                        // Set current line to previous line
+                        var tmp = prevInput;
+                        prevInput = line;
+                        line = tmp;
                     }
                 }
                 RenderBConsole(consoleText.ToArray(), msg, line, redactInfo);
             } while (key != ConsoleKey.Enter);
+            prevInput = line;
             return line;
         }
 

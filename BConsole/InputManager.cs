@@ -39,6 +39,22 @@ namespace BiscuitOS
             {
                 return true;
             }
+            else if (key == ConsoleKey.UpArrow)
+            {
+                return true;
+            }
+            else if (key == ConsoleKey.LeftArrow)
+            {
+                return true;
+            }
+            else if (key == ConsoleKey.RightArrow)
+            {
+                return true;
+            }
+            else if (key == ConsoleKey.DownArrow)
+            {
+                return true;
+            }
             else if (key == ConsoleKey.Tab)
             {
                 return true;
