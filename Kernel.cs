@@ -1,9 +1,7 @@
 ﻿using Sys = Cosmos.System;
-using BiscuitOS.Commands;
-using BiscuitOS.FileExplorer;
 using Cosmos.System.Graphics;
-using System.Drawing;
 using BiscuitOS.Graphics;
+using BiscuitOS.Math;
 
 namespace BiscuitOS
 {
@@ -11,18 +9,21 @@ namespace BiscuitOS
     {
         Sys.FileSystem.CosmosVFS fs = new Sys.FileSystem.CosmosVFS();
         public static Canvas canvas;
+        Window testWindow;
 
         protected override void BeforeRun()
         {
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
+            testWindow = new Window(new Dimension(420, 840), "New Empty Window");
+            //testWindow.MoveWindow(new Vector2(0, 0));
+
             Renderer.StartGUIMode();
         }
 
         protected override void Run()
-        {
-            Renderer.AddRenderWindow(new Window("New Empty Window", 840, 420));
-
+        { 
+            Renderer.AddRenderWindow(testWindow);
             Renderer.RenderScreen();
         }
     }

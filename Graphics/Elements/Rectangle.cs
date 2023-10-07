@@ -16,18 +16,24 @@ namespace BiscuitOS.Graphics
         /// <param name="y">Start Y</param>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
-        public Rectangle(int x, int y, int width = 10, int height = 10)
+        public Rectangle(Dimension Size, int x = 0, int y = 0)
         {
             this.x = x;
             this.y = y;
-            this.width = width;
-            this.height = height;
+            this.width = Size.width;
+            this.height = Size.height;
         }
 
         public void Draw()
         {
             Pen b = new Pen(Color.Black);
-            Kernel.canvas.DrawRectangle(b, x, y, width, height);
+            Kernel.canvas.DrawRectangle(b, this.x, this.y, height, width);
+        }
+
+        public void SetPos(int x, int y) 
+        {
+            this.x = x;
+            this.y = y;
         }
     }
 }
