@@ -6,7 +6,7 @@ namespace BiscuitOS.Graphics
 {
     public class Mouse
     {
-        public static Vector2 GetMousePos()
+        public static Point GetMousePos()
         {
             try
             {
@@ -17,11 +17,11 @@ namespace BiscuitOS.Graphics
                 int mouseX = Convert.ToInt32(mouseXu);
                 int mouseY = Convert.ToInt32(mouseYu);
 
-                return new Vector2(mouseX, mouseY);
+                return new Point(mouseX, mouseY);
             }
             catch
             {
-                return Vector2.Empty;
+                return Point.Empty;
             }
         }
     }

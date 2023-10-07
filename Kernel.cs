@@ -15,7 +15,7 @@ namespace BiscuitOS
         {
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
-            testWindow = new Window(new Dimension(420, 840), "New Empty Window");
+            testWindow = new Window(new Dimension(420, 840), 0, 0, "New Empty Window");
             //testWindow.MoveWindow(new Vector2(0, 0));
 
             Renderer.StartGUIMode();
