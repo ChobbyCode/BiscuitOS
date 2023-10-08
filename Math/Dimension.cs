@@ -7,7 +7,7 @@ namespace BiscuitOS.Math
     public class Dimension
     {
         public static Dimension Button = new Dimension(85, 35);
-        public static Dimension Window = new Dimension(420, 420);
+        public static Dimension Window = new Dimension(840, 420);
         public static Dimension Empty = new Dimension(0, 0);
         public static Dimension TenEightyP = new Dimension(1920, 1080);
 

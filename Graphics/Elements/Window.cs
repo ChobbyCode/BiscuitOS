@@ -19,7 +19,7 @@ namespace BiscuitOS.Graphics
             this.x = x;
             this.y = y;
             WindowName = Name;
-            border = new Rectangle(Size, Color.Black, Color.FromArgb(255, 117, 121, 127), 5, this.x, this.y, true);
+            border = new Rectangle(Size, Color.Black, Color.FromArgb(255, 117, 121, 127), 2, this.x, this.y, true);
         }
 
         public void Draw()

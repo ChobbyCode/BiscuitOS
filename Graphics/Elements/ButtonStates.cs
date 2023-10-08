@@ -1,5 +1,4 @@
-﻿
-namespace BiscuitOS.Graphics
+﻿namespace BiscuitOS.Graphics
 {
     public enum ButtonState
     {

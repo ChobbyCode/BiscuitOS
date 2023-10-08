@@ -1,4 +1,5 @@
-﻿using BiscuitOS.Math;
+﻿using BiscuitOS.Apps;
+using BiscuitOS.Math;
 using Cosmos.System;
 using Cosmos.System.Graphics;
 using System;
@@ -25,6 +26,10 @@ namespace BiscuitOS.Graphics
 
         public static void RenderScreen()
         {
+            // Tick Apps Render Frame
+            AppManager.TickApps();
+
+
             // Run All The Render Stuff
             Kernel.canvas.Clear(Color.DarkCyan);
 
