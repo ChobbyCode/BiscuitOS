@@ -1,9 +1,12 @@
 ﻿using BiscuitOS.Math;
+using System.Collections.Generic;
 
 namespace BiscuitOS.Graphics
 {
     public class Window
     {
+        private static List<TextBox> textboxs = new List<TextBox>();
+
         public int x, y;
 
         public string WindowName { get; private set; }
@@ -14,13 +17,27 @@ namespace BiscuitOS.Graphics
             this.x = x;
             this.y = y;
             WindowName = Name;
-            border = new Rectangle(Size, 0, 0);
+            border = new Rectangle(Size, 0, 0, true);
         }
 
         public void Draw()
         {
             // First Render The Border
             border.Draw();
+
+            foreach(TextBox textBox in textboxs)
+            {
+                textBox.Draw();
+            }
+            
+
+            // Clear arrays
+            textboxs = new List<TextBox>();
+        }
+
+        public void AddTextBox(TextBox textBox)
+        {
+            textboxs.Add(textBox);
         }
     }
 }

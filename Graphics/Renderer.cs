@@ -11,7 +11,6 @@ namespace BiscuitOS.Graphics
     {
         // List Of Render Items
         private static List<Window> windows = new List<Window>();
-        public static TextBox text;
 
         public static void StartGUIMode()
         {
@@ -21,16 +20,12 @@ namespace BiscuitOS.Graphics
             // Setup The Mouse Pointer
             MouseManager.ScreenWidth = 1920;
             MouseManager.ScreenHeight = 1080;
-
-            text = new TextBox();
         }
 
         public static void RenderScreen()
         {
             // Run All The Render Stuff
             Kernel.canvas.Clear(Color.DarkCyan);
-
-            text.Draw();
 
             RenderMouse(MouseManager.X, MouseManager.Y);
             foreach(Window window in windows)
