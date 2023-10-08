@@ -24,5 +24,10 @@ namespace BiscuitOS.Graphics
                 return Point.Empty;
             }
         }
+
+        public static MouseState GetMouseState()
+        {
+            return MouseManager.MouseState;
+        }
     }
 }

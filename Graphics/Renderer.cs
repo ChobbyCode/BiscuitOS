@@ -1,4 +1,5 @@
-﻿using Cosmos.System;
+﻿using BiscuitOS.Math;
+using Cosmos.System;
 using Cosmos.System.Graphics;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,9 @@ namespace BiscuitOS.Graphics
         {
             // Run All The Render Stuff
             Kernel.canvas.Clear(Color.DarkCyan);
+
+            // Rendering Below ---
+
 
             foreach(Window window in windows)
             {

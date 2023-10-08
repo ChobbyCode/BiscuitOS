@@ -7,6 +7,7 @@ namespace BiscuitOS.Graphics
     public class Window
     {
         private static List<TextBox> textboxs = new List<TextBox>();
+        private static List<Button> buttons = new List<Button>();
 
         public int x, y;
 
@@ -18,7 +19,7 @@ namespace BiscuitOS.Graphics
             this.x = x;
             this.y = y;
             WindowName = Name;
-            border = new Rectangle(Size, Color.Black, Color.Beige, 5, this.x, this.y, true);
+            border = new Rectangle(Size, Color.Black, Color.FromArgb(255, 117, 121, 127), 5, this.x, this.y, true);
         }
 
         public void Draw()
@@ -30,15 +31,24 @@ namespace BiscuitOS.Graphics
             {
                 textBox.Draw();
             }
-            
+            foreach (Button button in buttons)
+            {
+                button.Draw(new Math.Point(this.x, this.y));
+            }
+
 
             // Clear arrays
             textboxs = new List<TextBox>();
+            buttons = new List<Button>();
         }
 
-        public void AddTextBox(TextBox textBox)
+        public void Add(TextBox textBox)
         {
             textboxs.Add(textBox);
+        }
+        public void Add(Button button)
+        {
+            buttons.Add(button);
         }
     }
 }

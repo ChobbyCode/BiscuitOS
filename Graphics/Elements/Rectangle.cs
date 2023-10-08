@@ -1,4 +1,5 @@
 ﻿using BiscuitOS.Math;
+using Cosmos.System;
 using Cosmos.System.Graphics;
 using System.Drawing;
 
@@ -44,22 +45,28 @@ namespace BiscuitOS.Graphics
 
         public void Draw()
         {
-            Pen b = new Pen(this.drawColour);
+            Draw(new BiscuitOS.Math.Point(0, 0), this.innerColour, this.drawColour);
+        }
+
+        public void Draw(BiscuitOS.Math.Point offset)
+        {
+            Draw(offset, this.innerColour, this.drawColour);
+        }
+
+        public void Draw(BiscuitOS.Math.Point offset, Color newInCol, Color newDrCol)
+        {
+            int xOff = offset.x;
+            int yOff = offset.y;
+
+            Pen b = new Pen(newDrCol);
             if (!isFill)
             {
-                Kernel.canvas.DrawRectangle(b, this.x, this.y, height, width);
+                Kernel.canvas.DrawRectangle(b, this.x + xOff, this.y + yOff, width, height);
             }
             else
             {
-                if(this.drawColour != this.innerColour)
-                {
-                    Kernel.canvas.DrawFilledRectangle(b, this.x, this.y, height, width);
-                    Kernel.canvas.DrawFilledRectangle(new Pen(this.innerColour), this.x + (borderWidth), this.y + (borderWidth), height - (borderWidth * 2), width - (borderWidth * 2));
-                }
-                else
-                {
-                    Kernel.canvas.DrawFilledRectangle(b, this.x, this.y, height, width);
-                }
+                Kernel.canvas.DrawFilledRectangle(b, this.x + xOff, this.y + yOff, width, height);
+                Kernel.canvas.DrawFilledRectangle(new Pen(newInCol), this.x + xOff + (borderWidth), this.y + yOff + (borderWidth), width - (borderWidth * 2), height - (borderWidth * 2));
             }
         }
         

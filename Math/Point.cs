@@ -14,5 +14,12 @@ namespace BiscuitOS.Math
             this.x = x;
             this.y = y;
         }
+
+        public Point Combine(Point other)
+        {
+            this.x += other.x;
+            this.y += other.y;
+            return this;
+        }
     }
 }
