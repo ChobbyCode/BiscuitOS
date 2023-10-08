@@ -1,5 +1,5 @@
-﻿
-using Cosmos.System.Graphics;
+﻿using Cosmos.System.Graphics;
+using System.Drawing;
 
 namespace BiscuitOS.Graphics
 {
@@ -15,18 +15,18 @@ namespace BiscuitOS.Graphics
 
         public void Draw()
         {
-            DrawLetter(Letter.a, new Pen(Color.White), 0, 0);
+            DrawLetter(Letter.a, new Pen(Color.White), 50, 50);
         }
 
-        private void DrawLetter(int[] _char, Pen pen, int x, int y) 
-        { 
-            for(int pY = 0; pY < 20; pY++)
+        private void DrawLetter(int[] character, Pen pen, int x, int y) 
+        {
+            for(int pY = 0; pY < 20;  pY++)
             {
-                for(int pX = 0; pX < (_char.Length) / 20; pX++)
+                for(int pX = 0; pX < (character.Length / 20); pX++)
                 {
-                    if (_char[((_char.Length) / 20) * pY + pX] == 1)
+                    if (character[((character.Length) / 20) * pY + pX] == 1)
                     {
-                        Kernel.canvas.DrawPoint(pen, x, y);
+                        Renderer.DrawPixel(pen, x + pX * 2, y + pY * 2);
                     }
                 }
             }

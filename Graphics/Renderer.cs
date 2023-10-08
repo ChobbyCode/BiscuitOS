@@ -11,6 +11,7 @@ namespace BiscuitOS.Graphics
     {
         // List Of Render Items
         private static List<Window> windows = new List<Window>();
+        public static TextBox text;
 
         public static void StartGUIMode()
         {
@@ -20,12 +21,17 @@ namespace BiscuitOS.Graphics
             // Setup The Mouse Pointer
             MouseManager.ScreenWidth = 1920;
             MouseManager.ScreenHeight = 1080;
+
+            text = new TextBox();
         }
 
         public static void RenderScreen()
         {
             // Run All The Render Stuff
             Kernel.canvas.Clear(Color.DarkCyan);
+
+            text.Draw();
+
             RenderMouse(MouseManager.X, MouseManager.Y);
             foreach(Window window in windows)
             {
@@ -38,7 +44,6 @@ namespace BiscuitOS.Graphics
                     // Failed To Render Object
                 }
             }
-
             // Update The Canvas
             Kernel.canvas.Display();
 
@@ -61,6 +66,11 @@ namespace BiscuitOS.Graphics
             {
                 Debugger.Log(0, "Biscuit", e.ToString());
             }
+        }
+
+        public static void DrawPixel(Pen pen, int x, int y)
+        {
+            Kernel.canvas.DrawRectangle(pen, x, y, 1, 1);
         }
 
         /// <summary>
