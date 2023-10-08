@@ -27,7 +27,6 @@ namespace BiscuitOS.Graphics
             // Run All The Render Stuff
             Kernel.canvas.Clear(Color.DarkCyan);
 
-            RenderMouse(MouseManager.X, MouseManager.Y);
             foreach(Window window in windows)
             {
                 try
@@ -39,6 +38,9 @@ namespace BiscuitOS.Graphics
                     // Failed To Render Object
                 }
             }
+
+            RenderMouse(MouseManager.X, MouseManager.Y);
+
             // Update The Canvas
             Kernel.canvas.Display();
 
