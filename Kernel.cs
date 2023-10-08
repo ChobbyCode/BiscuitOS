@@ -15,15 +15,14 @@ namespace BiscuitOS
         {
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
-            //testWindow = new Window(new Dimension(420, 840), 0, 0, "New Empty Window");
-            //testWindow.MoveWindow(new Vector2(0, 0));
+            testWindow = new Window(new Dimension(420, 840), 150, 150, "New Empty Window");
 
             Renderer.StartGUIMode();
         }
 
         protected override void Run()
         { 
-            //Renderer.AddRenderWindow(testWindow);
+            Renderer.AddRenderWindow(testWindow);
             Renderer.RenderScreen();
         }
     }

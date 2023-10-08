@@ -1,5 +1,6 @@
 ﻿using BiscuitOS.Math;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace BiscuitOS.Graphics
 {
@@ -17,7 +18,7 @@ namespace BiscuitOS.Graphics
             this.x = x;
             this.y = y;
             WindowName = Name;
-            border = new Rectangle(Size, 0, 0, true);
+            border = new Rectangle(Size, Color.Black, Color.Beige, 5, this.x, this.y, true);
         }
 
         public void Draw()
