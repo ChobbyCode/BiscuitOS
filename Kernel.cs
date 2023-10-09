@@ -2,7 +2,6 @@
 using Cosmos.System.Graphics;
 using BiscuitOS.Graphics;
 using BiscuitOS.Math;
-using BiscuitOS.Apps;
 
 namespace BiscuitOS
 {

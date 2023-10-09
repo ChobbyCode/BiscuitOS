@@ -1,5 +1,4 @@
 ﻿using BiscuitOS.Apps;
-using BiscuitOS.Math;
 using Cosmos.System;
 using Cosmos.System.Graphics;
 using System;
@@ -52,9 +51,6 @@ namespace BiscuitOS.Graphics
 
             // Update The Canvas
             Kernel.canvas.Display();
-
-            // Reset all Lists
-            windows = new List<Window>();
         }
 
         private static void RenderMouse(uint mouseX, uint mouseY)

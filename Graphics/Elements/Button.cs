@@ -8,7 +8,7 @@ namespace BiscuitOS.Graphics
     {
         public Dimension Size = Dimension.Button;
         public BiscuitOS.Math.Point Position = BiscuitOS.Math.Point.Empty;
-        public TextBox Text;
+        //public TextBox Text;
 
         private ButtonState state = ButtonState.none;
         private ButtonState prevState = ButtonState.none;
@@ -18,14 +18,14 @@ namespace BiscuitOS.Graphics
         public Button(Dimension Size, int x = 0, int y = 0, string text = "")
         {
             this.Size = Size;
-            this.Text = new TextBox(0, 0, text);
+            //this.Text = new TextBox(0, 0, text);
             this.Position = new BiscuitOS.Math.Point(x, y);
             CreateDrawingComponents();
         }
         public Button(Dimension Size, BiscuitOS.Math.Point Position, string text = "")
         {
             this.Size = Size;
-            this.Text = new TextBox(0, 0, text);
+            //this.Text = new TextBox(0, 0, text);
             this.Position = Position;
             CreateDrawingComponents();
         }

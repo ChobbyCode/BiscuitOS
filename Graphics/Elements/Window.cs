@@ -6,7 +6,7 @@ namespace BiscuitOS.Graphics
 {
     public class Window
     {
-        private static List<TextBox> textboxs = new List<TextBox>();
+        //private static List<TextBox> textboxs = new List<TextBox>(); // Unimplemente
         private static List<Button> buttons = new List<Button>();
 
         public int x, y;
@@ -27,24 +27,19 @@ namespace BiscuitOS.Graphics
             // First Render The Border
             border.Draw();
 
-            foreach(TextBox textBox in textboxs)
-            {
-                textBox.Draw();
-            }
+            //foreach(TextBox textBox in textboxs)
+            //{
+                //textBox.Draw();
+            //}
             foreach (Button button in buttons)
             {
                 button.Draw(new Math.Point(this.x, this.y));
             }
-
-
-            // Clear arrays
-            textboxs = new List<TextBox>();
-            buttons = new List<Button>();
         }
 
         public void Add(TextBox textBox)
         {
-            textboxs.Add(textBox);
+            //textboxs.Add(textBox);
         }
         public void Add(Button button)
         {
