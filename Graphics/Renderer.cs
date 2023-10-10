@@ -1,4 +1,5 @@
 ﻿using BiscuitOS.Apps;
+using BiscuitOS.Tasks;
 using Cosmos.System;
 using Cosmos.System.Graphics;
 using System;
@@ -26,7 +27,7 @@ namespace BiscuitOS.Graphics
         public static void RenderScreen()
         {
             // Tick Apps Render Frame
-            AppManager.TickApps();
+            AppManager.TickHandlers();
 
 
             // Run All The Render Stuff

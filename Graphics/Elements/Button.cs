@@ -8,12 +8,15 @@ namespace BiscuitOS.Graphics
     {
         public Dimension Size = Dimension.Button;
         public BiscuitOS.Math.Point Position = BiscuitOS.Math.Point.Empty;
-        //public TextBox Text;
 
-        private ButtonState state = ButtonState.none;
+        public ButtonState state { get; private set; } = ButtonState.none;
         private ButtonState prevState = ButtonState.none;
 
-        Rectangle inner, outer, lowerBorder;
+        private Rectangle inner, outer, lowerBorder;
+
+        public bool Pressed { get; private set; } = false;
+
+        //private Math.Point offset;
 
         public Button(Dimension Size, int x = 0, int y = 0, string text = "")
         {
@@ -48,11 +51,13 @@ namespace BiscuitOS.Graphics
             Draw(new Math.Point(0, 0));
         }
 
-        public void Draw(Math.Point offset)
+        public void Tick(Math.Point offset)
         {
+            this.Pressed = false;
+
             // Check if mouse is in button bounds
             BiscuitOS.Math.Point mousePos = Mouse.GetMousePos();
-            if(mousePos.x > this.Position.x + offset.x && mousePos.x < this.Position.x + offset.x + this.Size.width && mousePos.y > this.Position.y + offset.y && mousePos.y < this.Position.y + offset.y + this.Size.height)
+            if (mousePos.x > this.Position.x + offset.x && mousePos.x < this.Position.x + offset.x + this.Size.width && mousePos.y > this.Position.y + offset.y && mousePos.y < this.Position.y + offset.y + this.Size.height)
             {
                 state = ButtonState.hover;
                 if (Mouse.GetMouseState() == MouseState.Left)
@@ -64,6 +69,21 @@ namespace BiscuitOS.Graphics
             {
                 state = ButtonState.none;
             }
+
+            if (prevState != state && state == ButtonState.clicked)
+            {
+                this.Pressed = true;
+
+            }
+
+            // Set prev variables
+            prevState = state;
+        }
+
+        public void Draw(Math.Point offset)
+        {
+
+            // Render the button
 
             if (state == ButtonState.none)
             {
@@ -86,15 +106,8 @@ namespace BiscuitOS.Graphics
                     inner.Draw(new Math.Point(0, 2).Combine(offset));
                     outer.Draw(new Math.Point(0, 2).Combine(offset));
 
-                    if(prevState != state)
-                    {
-                        // Basically We Pressed The Button
-                    }
                 }
             }
-
-            // Set prev variables
-            prevState = state;
         }
     }
 }

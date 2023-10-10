@@ -2,6 +2,8 @@
 using Cosmos.System.Graphics;
 using BiscuitOS.Graphics;
 using BiscuitOS.Math;
+using BiscuitOS.Apps;
+using BiscuitOS.Tasks;
 
 namespace BiscuitOS
 {
@@ -14,12 +16,17 @@ namespace BiscuitOS
         {
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
+            
+
             Renderer.StartGUIMode();
 
         }
 
         protected override void Run()
         {
+            //AppManager.TickHandlers();
+            
+
             Renderer.RenderScreen();
         }
     }
