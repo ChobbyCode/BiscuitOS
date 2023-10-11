@@ -1,4 +1,5 @@
 ﻿using BiscuitOS.Math;
+using BiscuitOS.Tasks;
 using Cosmos.System;
 using System.Drawing;
 
@@ -14,6 +15,8 @@ namespace BiscuitOS.Graphics
 
         private Rectangle inner, outer, lowerBorder;
 
+        public int id { get; private set; }
+
         public bool Pressed { get; private set; } = false;
 
         //private Math.Point offset;
@@ -23,6 +26,7 @@ namespace BiscuitOS.Graphics
             this.Size = Size;
             //this.Text = new TextBox(0, 0, text);
             this.Position = new BiscuitOS.Math.Point(x, y);
+            this.id = AppManager.GetButtonId();
             CreateDrawingComponents();
         }
         public Button(Dimension Size, BiscuitOS.Math.Point Position, string text = "")
@@ -30,6 +34,7 @@ namespace BiscuitOS.Graphics
             this.Size = Size;
             //this.Text = new TextBox(0, 0, text);
             this.Position = Position;
+            this.id = AppManager.GetButtonId();
             CreateDrawingComponents();
         }
 

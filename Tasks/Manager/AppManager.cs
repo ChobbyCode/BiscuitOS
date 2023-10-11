@@ -11,6 +11,8 @@ namespace BiscuitOS.Tasks
          */
         private static List<App> _CurrentEvents = new List<App>();
 
+        private static int _buttonsIdentityManager = 0;
+
         public static void Add(App app)
         {
             _CurrentEvents.Add(app);
@@ -23,6 +25,12 @@ namespace BiscuitOS.Tasks
             {
                 app.Tick();
             }
+        }
+
+        public static int GetButtonId()
+        {
+            _buttonsIdentityManager++;
+            return _buttonsIdentityManager;
         }
     }
 }

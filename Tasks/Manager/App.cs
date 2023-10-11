@@ -37,13 +37,13 @@ namespace BiscuitOS.Tasks
                 {
                     if(button.Pressed)
                     {
-                        Invokement(button);
+                        Invokement(button.id);
                     }
                 }
                 window.Draw();
             }
         }
 
-        public virtual void Invokement(object sender) {}
+        public virtual void Invokement(int id) {}
     }
 }
