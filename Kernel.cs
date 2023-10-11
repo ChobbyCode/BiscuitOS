@@ -16,7 +16,8 @@ namespace BiscuitOS
         {
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
-            
+            Test test = new Test();
+            test.Start();
 
             Renderer.StartGUIMode();
 

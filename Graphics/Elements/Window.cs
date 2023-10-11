@@ -59,7 +59,7 @@ namespace BiscuitOS.Graphics
         {
             foreach(Button button in _Buttons)
             {
-                button.Tick(new Math.Point(0, 0));
+                button.Tick(new Math.Point(this.x, this.y));
             }
         }
     }
