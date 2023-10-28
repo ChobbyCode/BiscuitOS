@@ -10,6 +10,10 @@ namespace BiscuitOS.Shell
         public static void AddCommands()
         {
             RC.Add(Exit.New());
+            foreach(ShellCommand command in RC)
+            {
+                BConsole.WriteLine("Registered: " + command.TriggerWord);
+            }
         }
 
         public static void ParseUserCommand(string command)

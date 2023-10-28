@@ -20,6 +20,7 @@ namespace BiscuitOS.Shell
 
             foreach (ShellCommand obj in Shell.RC)
             {
+                BConsole.WriteLine("Trigger Word: " + obj.TriggerWord);
                 if(obj.TriggerWord == trigWord)
                 {
                     obj.DoCommandStuff(commandWord);
