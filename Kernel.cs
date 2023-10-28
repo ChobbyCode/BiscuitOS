@@ -4,6 +4,8 @@ using BiscuitOS.Graphics;
 using BiscuitOS.Math;
 using BiscuitOS.Apps;
 using BiscuitOS.Tasks;
+using BiscuitOS.Commands;
+using BiscuitOS.FileExplorer;
 
 namespace BiscuitOS
 {
@@ -16,19 +18,21 @@ namespace BiscuitOS
         {
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
-            Test test = new Test();
-            test.Start();
+            //Test test = new Test();
+            //test.Start();
 
-            Renderer.StartGUIMode();
+            //Renderer.StartGUIMode();
 
         }
 
         protected override void Run()
         {
             //AppManager.TickHandlers();
-            
+            var input = BConsole.ReadLine($"{FileMan.GetPath()}> ");
+            BConsole.WriteLine($"{FileMan.GetPath()}> {input}");
+            CommandManager.Command(input);
 
-            Renderer.RenderScreen();
+            //Renderer.RenderScreen();
         }
     }
 }
