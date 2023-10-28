@@ -16,6 +16,10 @@ namespace BiscuitOS.Shell
         {
             // Parse the command words ready for reading
             string[] commandWord = CommandParser.ParseCommand(command);
+            foreach (string word in commandWord)
+            {
+                BConsole.WriteLine(word);
+            }
 
             // Run the command words
             CommandInterpreter.Interpret(commandWord);

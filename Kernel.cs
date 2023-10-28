@@ -24,6 +24,9 @@ namespace BiscuitOS
 
             //Renderer.StartGUIMode();
 
+
+            Shell.Shell.AddCommands();
+
         }
 
         protected override void Run()
