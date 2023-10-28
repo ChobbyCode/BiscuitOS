@@ -14,7 +14,18 @@ namespace BiscuitOS.Shell
              * - Post error message
              */
 
+            // Check for built in commands
 
+            var trigWord = commandWord[0];
+
+            foreach (ShellCommand obj in Shell.RC)
+            {
+                if(obj.TriggerWord == trigWord)
+                {
+                    obj.DoCommandStuff(commandWord);
+                    return;
+                }
+            }
         }
     }
 }

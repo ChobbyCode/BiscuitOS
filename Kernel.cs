@@ -6,6 +6,7 @@ using BiscuitOS.Apps;
 using BiscuitOS.Tasks;
 using BiscuitOS.Commands;
 using BiscuitOS.FileExplorer;
+using BiscuitOS.Shell;
 
 namespace BiscuitOS
 {
@@ -30,7 +31,7 @@ namespace BiscuitOS
             //AppManager.TickHandlers();
             var input = BConsole.ReadLine($"{FileMan.GetPath()}> ");
             BConsole.WriteLine($"{FileMan.GetPath()}> {input}");
-            CommandManager.Command(input);
+            Shell.Shell.ParseUserCommand( input );
 
             //Renderer.RenderScreen();
         }

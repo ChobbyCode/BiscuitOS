@@ -4,13 +4,11 @@ namespace BiscuitOS.Shell
 {
     public class ShellCommand
     {
-        /// <summary>
-        /// Registers the command as a system shell command
-        /// </summary>
-        public virtual void Register() { }
+        public string TriggerWord;
+
         /// <summary>
         /// Does the command stuff
         /// </summary>
-        public virtual void DoCommandStuff() { }
+        public virtual void DoCommandStuff(string[] commandWords) { }
     }
 }
