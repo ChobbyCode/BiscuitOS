@@ -5,28 +5,23 @@ namespace BiscuitOS.Shell
 {
     public class Shell
     {
-        internal static List <ShellCommand> RC = new List <ShellCommand> ();
-
-        public static void AddCommands()
-        {
-            RC.Add(Exit.New());
-            foreach(ShellCommand command in RC)
-            {
-                BConsole.WriteLine("Registered: " + command.TriggerWord);
-            }
-        }
-
         public static void ParseUserCommand(string command)
         {
             // Parse the command words ready for reading
             string[] commandWord = CommandParser.ParseCommand(command);
-            foreach (string word in commandWord)
-            {
-                BConsole.WriteLine(word);
-            }
 
             // Run the command words
-            CommandInterpreter.Interpret(commandWord);
+            // Failed Or Succeeded
+            int FS = CommandInterpreter.Interpret(commandWord);
+            if(FS == 0)
+            {
+                // Print No Exist
+                BConsole.WriteLine($"'{commandWord[0]}' is not recognized as an internal or external Shell command.");
+            }
+            if(FS == 2)
+            {
+                BConsole.WriteLine($"Unimplemented Shell Command '{commandWord[0]}'.");
+            }
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using BiscuitOS.FileExplorer;
-using BiscuitOS.Commands;
+using BiscuitOS.Shell;
 
 namespace BiscuitOS.FileExecutable
 {
@@ -21,7 +21,7 @@ namespace BiscuitOS.FileExecutable
 
                 foreach (string line in readFile)
                 {
-                    CommandManager.Command(line);
+                    Shell.Shell.ParseUserCommand(line);
                     //.WriteLine($"Doing Command {line}");
                 }
             }

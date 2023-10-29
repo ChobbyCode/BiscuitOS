@@ -2,20 +2,13 @@
 
 namespace BiscuitOS.Shell.Commands
 {
-    internal class Exit : ShellCommand
+    internal class Exit
     {
-        public new string TriggerWord = "exit";
-
-        public override void DoCommandStuff(string[] c)
+        public static void Execute(string[] c)
         {
             // Just Exit The System
             Thread.Sleep(1000);
             Cosmos.System.Power.Shutdown();
-        }
-
-        public static ShellCommand New()
-        {
-            return new Exit();
         }
     }
 }

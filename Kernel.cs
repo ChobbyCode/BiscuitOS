@@ -1,12 +1,7 @@
 ﻿using Sys = Cosmos.System;
 using Cosmos.System.Graphics;
-using BiscuitOS.Graphics;
-using BiscuitOS.Math;
-using BiscuitOS.Apps;
-using BiscuitOS.Tasks;
-using BiscuitOS.Commands;
 using BiscuitOS.FileExplorer;
-using BiscuitOS.Shell;
+
 
 namespace BiscuitOS
 {
@@ -23,10 +18,6 @@ namespace BiscuitOS
             //test.Start();
 
             //Renderer.StartGUIMode();
-
-
-            Shell.Shell.AddCommands();
-
         }
 
         protected override void Run()
