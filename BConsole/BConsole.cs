@@ -99,6 +99,9 @@ namespace BiscuitOS
 
         private static void RenderBConsole(string[] lines, string msg, string actionBar, bool ObfuscateInput)
         {
+            // We can't draw to the screen if the shell is not in text mode :(
+            if (!Shell.Shell.IsShellTextM()) return;
+
             // Basic Setup Stuff
             List<string> output = new List<string>();
             output = lines.ToList();
