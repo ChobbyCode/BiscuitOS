@@ -1,6 +1,7 @@
 ﻿using Sys = Cosmos.System;
 using Cosmos.System.Graphics;
 using BiscuitOS.FileExplorer;
+using S = BiscuitOS.Shell;
 
 
 namespace BiscuitOS
@@ -17,15 +18,17 @@ namespace BiscuitOS
             //Test test = new Test();
             //test.Start();
 
+            // Start Shell
+            S.Shell.InitShell(Shell.ShellMode.Text);
+
             //Renderer.StartGUIMode();
         }
 
         protected override void Run()
         {
             //AppManager.TickHandlers();
-            var input = BConsole.ReadLine($"{FileMan.GetPath()}> ");
-            BConsole.WriteLine($"{FileMan.GetPath()}> {input}");
-            Shell.Shell.ParseUserCommand( input );
+
+            S.Shell.TickShell();
 
             //Renderer.RenderScreen();
         }

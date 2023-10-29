@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BiscuitOS.FileManager;
 using BiscuitOS.Shell.Commands;
 
 namespace BiscuitOS.Shell
@@ -8,7 +9,7 @@ namespace BiscuitOS.Shell
         /*
          * == Shell Notes ==
          * 
-         * - Changing the shell mode requires a restart
+         * - If the mode of the shell moves backwards, it requires a restart
          * 
          */
 
@@ -18,11 +19,25 @@ namespace BiscuitOS.Shell
         private static ShellMode Mode;
         private static bool ShellInited = false;
 
-        public static void InitShell(ShellMode StartMode)
+        public static void InitShell(ShellMode StartMode, int[]? errors = null)
         {
             if(!ShellInited)
             {
                 Mode = StartMode;
+
+                // Arguments & Stuff
+                if(errors != null)
+                {
+                    foreach(int error in errors)
+                    {
+                        switch(error) {
+                            case 0:
+                                BConsole.WriteLine("Bad Start: Shell failed to start correctly");
+                                break;
+                        }
+                    }
+                }
+
                 ShellInited = true;
             }
             else
@@ -31,6 +46,28 @@ namespace BiscuitOS.Shell
 
                 // Cannot init shell if already inited
             }
+        }
+
+        public static int TickShell()
+        {
+            // We need to know if the Shell is usable
+            if (!IsShellUsable())
+            {
+                int[] args = { 0 };
+                InitShell(ShellMode.Text, args);
+            }
+
+            if (IsShellTextM()) TickTextShell();
+
+            return 1;
+        }
+
+        private static void TickTextShell()
+        {
+            // Old Code From Kernel
+            var input = BConsole.ReadLine($"{FileMan.GetPath()}> ");
+            BConsole.WriteLine($"{FileMan.GetPath()}> {input}");
+            ParseUserCommand(input);
         }
 
         /// <summary>
@@ -43,6 +80,10 @@ namespace BiscuitOS.Shell
             else return No;
         }
 
+        /// <summary>
+        /// Check to see if the Shell is in text mode
+        /// </summary>
+        /// <returns></returns>
         public static bool IsShellTextM()
         {
             if(Mode == ShellMode.Text) return Yes;

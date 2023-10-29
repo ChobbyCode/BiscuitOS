@@ -1,5 +1,5 @@
 ﻿using BiscuitOS.Apps.TextEditor;
-using BiscuitOS.FileExplorer;
+using BiscuitOS.FileManager;
 using BiscuitOS.Shell.Commands;
 
 namespace BiscuitOS.Shell
@@ -67,6 +67,9 @@ namespace BiscuitOS.Shell
             {
                 case "exit":
                     Exit.Execute(args);
+                    return 1;
+                case "system":
+                    BiscuitOS.Shell.Commands.System.Execute(args);
                     return 1;
                 default:
                     return 0;
