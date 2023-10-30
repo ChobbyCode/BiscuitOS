@@ -19,7 +19,8 @@ namespace BiscuitOS
             //test.Start();
 
             // Start Shell
-            S.Shell.InitShell(Shell.ShellMode.Text);
+            //S.Shell.InitShell(Shell.ShellMode.Text);
+            Guts.System.OSStartUp();
 
             //Renderer.StartGUIMode();
         }
@@ -28,7 +29,7 @@ namespace BiscuitOS
         {
             //AppManager.TickHandlers();
 
-            S.Shell.TickShell();
+            //S.Shell.TickShell();
 
             //Renderer.RenderScreen();
         }
