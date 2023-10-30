@@ -29,7 +29,7 @@ namespace BiscuitOS
         {
             //AppManager.TickHandlers();
 
-            //S.Shell.TickShell();
+            S.Shell.TickShell();
 
             //Renderer.RenderScreen();
         }

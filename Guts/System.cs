@@ -26,6 +26,8 @@ namespace BiscuitOS.Guts
             Console.Clear();
             Console.WriteLine("Start BiscuitOS Boot Process..");
 
+            //File.Delete(SystemFile);
+
             GetSysInfo();
 
             OSStarted = true;
@@ -50,10 +52,32 @@ namespace BiscuitOS.Guts
                     // Get The Contents Of The Sys File
                     var SysContents = File.ReadAllLines(SystemFile);
 
-                    foreach (var Sys in SysContents)
+                    // Do Stuff
+                    var CorrectUser = SysContents[0];
+                    var CorrectPass = SysContents[1];
+
+                    // Start Da Shell
+                    Shell.Shell.InitShell(ShellMode.Text);
+
+                    // Login
+                    BConsole.WriteLine("Welcome To BiscuitOS");
+                    // Username
+                    string user = String.Empty;
+                    while(user != CorrectUser)
                     {
-                        Console.WriteLine(Sys);
+                        user = BConsole.ReadLine("Username: ");
                     }
+                    //Password
+                    string pass = String.Empty;
+                    while (pass != CorrectUser)
+                    {
+                        pass = BConsole.ReadRedacted("Password: ");
+                    }
+
+                    // We Are Done.
+
+                    // Do any extra things in the furture
+
                 }
                 catch
                 {
@@ -63,6 +87,8 @@ namespace BiscuitOS.Guts
             }
             else
             {
+                bool SuccessInstall = false;
+
                 // Then we need to locate it
                 try
                 {
@@ -70,16 +96,27 @@ namespace BiscuitOS.Guts
                     if (!Directory.Exists(@"0:\Biscuit\Boot\")) Directory.CreateDirectory(@"0:\Biscuit\Boot\");
 
                     File.Create(SystemFile);
+
+                    InstallOS();
+
+                    SuccessInstall = true;
                 }
-                catch (Exception e) 
+                catch (Exception e)
                 {
                     // Hard to do errors because Shell hasn't started up so no user communication
                     Console.WriteLine("System Error 'x0001': Failed To Create System File");
                     Console.WriteLine();
                     Console.WriteLine(e);
-                }
 
-                InstallOS();
+                    SuccessInstall = false;
+                }
+                finally
+                {
+                    if(!SuccessInstall)
+                    {
+                        // Roll Back Changes
+                    }
+                }
             }
         }
 
@@ -98,6 +135,7 @@ namespace BiscuitOS.Guts
             catch
             {
                 // Starting Up Error || Shell hasn't started yet so it will be difficult to inform the user.
+                Console.WriteLine("System Error 'x0003': Failed To Find System File");
                 return false;
             }
         }
@@ -109,21 +147,43 @@ namespace BiscuitOS.Guts
         {
             StartShell();
 
+            if (Shell.Shell.IsShellUsable() == false) Console.WriteLine("System Error 'x0004': Shell Is Not Usable For An Unknown Reason");
+
             BConsole.Clear();
 
             BConsole.WriteLine("Welcome to BiscuitOS. A light-weight Operating System.");
             BConsole.WriteLine("To start using the OS, we need to know your name.");
             BConsole.WriteLine("What should we call you?");
 
-            var name = BConsole.ReadLine("Your Name");
+            var name = BConsole.ReadLine("Your Name: ");
 
             BConsole.WriteLine("Furthermore, we also need a password for your account.");
             BConsole.WriteLine("What should we set your password as?");
 
-            var password = BConsole.ReadRedacted("Your Password");
+            var password = BConsole.ReadRedacted("Your Password: ");
 
             BConsole.WriteLine("We are going to do some stuff to install eveything.");
             BConsole.WriteLine("This may take some time..");
+
+            GenerateSysFile(name, password);
+
+            BConsole.WriteLine("Installation Complete. Please Restart The System.");
+        }
+
+        private static void GenerateSysFile(string username, string password)
+        {
+            try
+            {
+                string[] sysFileContents =
+                {
+                    username, password,
+                };
+                File.WriteAllLines(SystemFile, sysFileContents);
+            }
+            catch
+            {
+                Console.WriteLine("System Error 'x0001': Failed To Create System File");
+            }
         }
 
         private static void StartShell()
