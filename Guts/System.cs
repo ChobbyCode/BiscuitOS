@@ -102,14 +102,39 @@ namespace BiscuitOS.Guts
             }
         }
 
+        /// <summary>
+        /// Installation
+        /// </summary>
         private static void InstallOS()
         {
+            StartShell();
 
+            BConsole.Clear();
+
+            BConsole.WriteLine("Welcome to BiscuitOS. A light-weight Operating System.");
+            BConsole.WriteLine("To start using the OS, we need to know your name.");
+            BConsole.WriteLine("What should we call you?");
+
+            var name = BConsole.ReadLine("Your Name");
+
+            BConsole.WriteLine("Furthermore, we also need a password for your account.");
+            BConsole.WriteLine("What should we set your password as?");
+
+            var password = BConsole.ReadRedacted("Your Password");
+
+            BConsole.WriteLine("We are going to do some stuff to install eveything.");
+            BConsole.WriteLine("This may take some time..");
         }
 
         private static void StartShell()
         {
+            /*
+             *  == NOTES ==
+             *  
+             *  - There needs to be a sep Shell mode for install / sys high levels
+             */
 
+            Shell.Shell.InitShell(ShellMode.Text);
         }
 
         public static bool isInstalled()
