@@ -4,6 +4,9 @@ using System.IO;
 
 namespace BiscuitOS.Guts
 {
+    /// <summary>
+    /// Raw System Of The OS. Mainly Boot Files Etc..
+    /// </summary>
     public class System
     {
         /*
