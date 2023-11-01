@@ -72,5 +72,32 @@ namespace BiscuitOS.FileManager
             }
             return relative;
         }
+
+        public static string[] getFiles()
+        {
+            try
+            {
+                var Files = Directory.GetFiles(CurrentDir);
+
+                return Files;
+            }catch
+            {
+                return new string[0]; 
+            }
+        }
+
+        public static string[] getFolders()
+        {
+            try
+            {
+                var Directories = Directory.GetDirectories(CurrentDir);
+
+                return Directories;
+            }
+            catch
+            {
+                return new string[0];
+            }
+        }
     }
 }

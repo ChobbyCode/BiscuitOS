@@ -2,6 +2,8 @@
 using Cosmos.System.Graphics;
 using BiscuitOS.FileExplorer;
 using S = BiscuitOS.Shell;
+using BiscuitOS.FileExplorer.Application;
+using System;
 
 
 namespace BiscuitOS
@@ -15,12 +17,18 @@ namespace BiscuitOS
         {
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
-            //Test test = new Test();
-            //test.Start();
-
-            // Start Shell
-            //S.Shell.InitShell(Shell.ShellMode.Text);
-            Guts.System.OSStartUp();
+            Console.Clear();
+            Console.WriteLine("BiscuitOS First Message: ");
+            Console.WriteLine("Leave Blank For Normal Start. Type 'FORCE' To Do A Force Start: ");
+            var input = Console.ReadLine();
+            if(input == "FORCE")
+            {
+                S.Shell.InitShell(Shell.ShellMode.Text);
+            }
+            else
+            {
+                Guts.System.OSStartUp();
+            }
 
             //Renderer.StartGUIMode();
         }
@@ -29,7 +37,9 @@ namespace BiscuitOS
         {
             //AppManager.TickHandlers();
 
-            S.Shell.TickShell();
+            //S.Shell.TickShell();
+
+            FileViewer.Start();
 
             //Renderer.RenderScreen();
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BiscuitOS.FileManager;
 using BiscuitOS.Shell.Commands;
 
@@ -60,6 +61,29 @@ namespace BiscuitOS.Shell
             if (IsShellTextM()) TickTextShell();
 
             return 1;
+        }
+
+        /// <summary>
+        /// Login
+        /// </summary>
+        /// <param name="CorrectUser"></param>
+        /// <param name="CorrectPass"></param>
+        public static void Login(string CorrectUser, string CorrectPass)
+        {
+            // Login
+            BConsole.WriteLine("Welcome To BiscuitOS");
+            // Username
+            string user = String.Empty;
+            while (user != CorrectUser)
+            {
+                user = BConsole.ReadLine("Username: ");
+            }
+            //Password
+            string pass = String.Empty;
+            while (pass != CorrectUser)
+            {
+                pass = BConsole.ReadRedacted("Password: ");
+            }
         }
 
         private static void TickTextShell()

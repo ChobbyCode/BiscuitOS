@@ -1,6 +1,6 @@
 This file contains a list of all the error codes and what they mean.
 
-x0001 - x0099 = System Start/Boot Errors
+x0001 - x0099 = System Errors
 
 x0001: Failed To Create System File -
 
@@ -20,3 +20,9 @@ x0004: Shell Is Not Usable For An Unknown Reason -
 
 The boot sometimes relys on the Shell to get user information. If the Shell has not be started, it
 cannot get information from the user. 
+
+x0005: High System Deletion Error -
+
+Usually the OS can rely on the FileManager to make all the file changes, however some stuff - sometimes -
+the FileMan cannot do, so the highest level is called - system -, this is caused when the system 
+fails to modify the files.

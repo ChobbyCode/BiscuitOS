@@ -29,8 +29,6 @@ namespace BiscuitOS.Guts
             Console.Clear();
             Console.WriteLine("Start BiscuitOS Boot Process..");
 
-            //File.Delete(SystemFile);
-
             GetSysInfo();
 
             OSStarted = true;
@@ -62,20 +60,7 @@ namespace BiscuitOS.Guts
                     // Start Da Shell
                     Shell.Shell.InitShell(ShellMode.Text);
 
-                    // Login
-                    BConsole.WriteLine("Welcome To BiscuitOS");
-                    // Username
-                    string user = String.Empty;
-                    while(user != CorrectUser)
-                    {
-                        user = BConsole.ReadLine("Username: ");
-                    }
-                    //Password
-                    string pass = String.Empty;
-                    while (pass != CorrectUser)
-                    {
-                        pass = BConsole.ReadRedacted("Password: ");
-                    }
+                    Shell.Shell.Login(CorrectUser, CorrectPass);
 
                     // We Are Done.
 
