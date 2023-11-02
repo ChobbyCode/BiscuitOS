@@ -106,7 +106,7 @@ namespace BiscuitOS.FileManager
                 {
                     try
                     {
-                        Directory.Delete(GetPath() + path);
+                        Directory.Delete(GetPath() + path + @"\", true);
                     }
                     catch
                     {
@@ -117,7 +117,7 @@ namespace BiscuitOS.FileManager
                 {
                     try
                     {
-                        Directory.Delete(path);
+                        Directory.Delete(path + @"\", true);
                     }
                     catch
                     {

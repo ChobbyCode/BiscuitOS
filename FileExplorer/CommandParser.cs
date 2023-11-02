@@ -92,7 +92,7 @@ namespace BiscuitOS.FileExplorer
         {
             try
             {
-                Directory.Delete(FileMan.GetPath() + commandWord[3]);
+                File.Delete(FileMan.GetPath() + commandWord[3]);
             }
             catch
             {
