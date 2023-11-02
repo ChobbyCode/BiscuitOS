@@ -18,8 +18,11 @@ namespace BiscuitOS.Shell
 
             // Check for built in commands
 
-            int SC = CheckSysCmd(cW[0], cW);
-            if (SC == 1) return 1;
+            try
+            {
+                int SC = CheckSysCmd(cW[0], cW);
+                if (SC == 1) return 1;
+            }catch { }
 
             // Do Shell Extensions and stuff next...
 
