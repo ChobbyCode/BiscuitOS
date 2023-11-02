@@ -92,11 +92,11 @@ namespace BiscuitOS.FileExplorer
         {
             try
             {
-                FileMan.DeleteFile(commandWord[3]);
+                Directory.Delete(FileMan.GetPath() + commandWord[3]);
             }
             catch
             {
-                BConsole.WriteLine("Failed To Create File");
+                BConsole.WriteLine("Failed To Delete Folder");
             }
         }
 
@@ -104,7 +104,7 @@ namespace BiscuitOS.FileExplorer
         {
             try
             {
-                FileMan.DeleteFolder(commandWord[3]);
+                Directory.Delete(FileMan.GetPath() + commandWord[3]);
             }
             catch
             {
