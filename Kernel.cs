@@ -37,9 +37,7 @@ namespace BiscuitOS
         {
             //AppManager.TickHandlers();
 
-            //S.Shell.TickShell();
-
-            FileViewer.Start();
+            S.Shell.TickShell();
 
             //Renderer.RenderScreen();
         }

@@ -11,6 +11,122 @@ namespace BiscuitOS.FileManager
     {
         private static string CurrentDir = @"0:\";
 
+        public static void CreateFolder(string path)
+        {
+            if (!Directory.Exists(path))
+            {
+                if(isRelative(path))
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(GetPath() + path);
+                    }
+                    catch
+                    {
+
+                    }
+                }else
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
+            return;
+        }
+
+        public static void CreateFile(string path)
+        {
+            if (!File.Exists(path))
+            {
+                if (isRelative(path))
+                {
+                    try
+                    {
+                        File.Create(GetPath() + path);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        File.Create(path);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
+            return;
+        }
+
+        public static void DeleteFile(string path)
+        {
+            if (File.Exists(path))
+            {
+                if (isRelative(path))
+                {
+                    try
+                    {
+                        File.Delete(GetPath() + path);
+                    }catch
+                    {
+
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        File.Delete(path);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
+        }
+
+        public static void DeleteFolder(string path)
+        {
+            if (Directory.Exists(path))
+            {
+                if (isRelative(path))
+                {
+                    try
+                    {
+                        Directory.Delete(GetPath() + path);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        Directory.Delete(path);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
+        }
+
         public static void ParseFileCommand(string[] commandWord)
         {
             // I hate how ugly this is
