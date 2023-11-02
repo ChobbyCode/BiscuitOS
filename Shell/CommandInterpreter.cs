@@ -6,7 +6,7 @@ namespace BiscuitOS.Shell
 {
     internal class CommandInterpreter
     {
-        public static int Interpret(string[] cW)
+        public static int Interpret(string[] cW, string[] unSplit)
         {
             /*
              * == ORDER OF OPERATION ==
@@ -20,7 +20,7 @@ namespace BiscuitOS.Shell
 
             try
             {
-                int SC = CheckSysCmd(cW[0], cW);
+                int SC = CheckSysCmd(cW[0], cW , unSplit);
                 if (SC == 1) return 1;
             }catch { }
 
@@ -32,7 +32,7 @@ namespace BiscuitOS.Shell
             return 0;
         }
 
-        public static int CheckSysCmd(string trigWord, string[] args)
+        public static int CheckSysCmd(string trigWord, string[] args, string[] unLow)
         {
             /*
              * == ORDER OF OPERATION ==
@@ -43,18 +43,18 @@ namespace BiscuitOS.Shell
              */
 
             // High Level
-            int HL = CheckHighLevel(trigWord, args);
+            int HL = CheckHighLevel(trigWord, args, unLow);
             if (HL == 1 || HL == 2) return HL;
 
             // Low Level
-            int LL = CheckLowLevel(trigWord, args);
+            int LL = CheckLowLevel(trigWord, args, unLow);
             if (LL == 1 || LL == 2) return LL;
 
             // No Command Was Found
             return 0;
         }
 
-        public static int CheckHighLevel(string trigWord, string[] args)
+        public static int CheckHighLevel(string trigWord, string[] args, string[] unLow)
         {
             /*
              * == Notes ==
@@ -79,7 +79,7 @@ namespace BiscuitOS.Shell
             }
         }
 
-        public static int CheckLowLevel(string trigWord, string[] args)
+        public static int CheckLowLevel(string trigWord, string[] args, string[] unLow)
         {
             /*
              * == Notes ==
@@ -106,7 +106,7 @@ namespace BiscuitOS.Shell
                     FileMan.BackDir();
                     return 1;
                 case "fm":
-                    FileMan.ParseFileCommand(args);
+                    FileMan.ParseFileCommand(args, unLow);
                     return 1;
                 case "open":
                     string[] open = { FileMan.GetPath() + args[1] };

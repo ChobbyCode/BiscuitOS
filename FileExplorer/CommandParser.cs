@@ -7,7 +7,7 @@ namespace BiscuitOS.FileExplorer
 {
     internal class CommandParser
     {
-        public static void ParseCommand(string[] commandWord)
+        public static void ParseCommand(string[] commandWord, string[] unLow)
         {
             // The First Chain
             switch(commandWord[1])
@@ -16,10 +16,10 @@ namespace BiscuitOS.FileExplorer
                     New(commandWord);
                     break;
                 case "del":
-                    Delete(commandWord);
+                    Delete(commandWord, unLow);
                     break;
                 case "delete":
-                    Delete(commandWord);
+                    Delete(commandWord, unLow);
                     break;
                 default:
                     BConsole.WriteLine("Invalid Use Of Command 'fm'.");
@@ -69,7 +69,7 @@ namespace BiscuitOS.FileExplorer
             }
         }
 
-        private static void Delete(string[] commandWord)
+        private static void Delete(string[] commandWord, string[] unLow)
         {
             switch (commandWord[2])
             {
@@ -80,7 +80,7 @@ namespace BiscuitOS.FileExplorer
                     DeleteFile(commandWord);
                     break;
                 case "dir":
-                    DeleteFolder(commandWord);
+                    DeleteFolder(commandWord, unLow);
                     break;
                 default:
                     BConsole.WriteLine("Invalid Use Of Command 'delete'.");
@@ -96,19 +96,20 @@ namespace BiscuitOS.FileExplorer
             }
             catch
             {
-                BConsole.WriteLine("Failed To Delete Folder");
+                BConsole.WriteLine("Failed To Delete File");
             }
         }
 
-        private static void DeleteFolder(string[] commandWord)
+        private static void DeleteFolder(string[] commandWord, string[] unLow)
         {
             try
             {
-                Directory.Delete(FileMan.GetPath() + commandWord[3]);
+                BConsole.WriteLine("OPEN FOLDER: " + FileMan.GetPath() + unLow[3] + @"\");
+                Directory.Delete(FileMan.GetPath() + unLow[3] + @"\");
             }
             catch
             {
-                BConsole.WriteLine("Failed To Create Folder");
+                BConsole.WriteLine("Failed To Delete Folder");
             }
         }
     }

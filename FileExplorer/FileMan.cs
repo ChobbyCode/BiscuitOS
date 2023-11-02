@@ -127,10 +127,10 @@ namespace BiscuitOS.FileManager
             }
         }
 
-        public static void ParseFileCommand(string[] commandWord)
+        public static void ParseFileCommand(string[] commandWord, string[] unLow)
         {
             // I hate how ugly this is
-            CommandParser.ParseCommand(commandWord);
+            CommandParser.ParseCommand(commandWord, unLow);
         }
 
         public static void AddDir(string folder)
