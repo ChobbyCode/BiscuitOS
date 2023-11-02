@@ -1,4 +1,5 @@
-﻿using BiscuitOS.Shell;
+﻿using BiscuitOS.FileManager;
+using BiscuitOS.Shell;
 using System;
 using System.IO;
 
@@ -153,12 +154,12 @@ namespace BiscuitOS.Guts
             BConsole.WriteLine("We are going to do some stuff to install eveything.");
             BConsole.WriteLine("This may take some time..");
 
-            GenerateSysFile(name, password);
+            GenerateSysFiles(name, password);
 
-            BConsole.WriteLine("Installation Complete. Please Restart The System.");
+            // Open hello file thing
         }
 
-        private static void GenerateSysFile(string username, string password)
+        private static void GenerateSysFiles(string username, string password)
         {
             try
             {
@@ -167,11 +168,44 @@ namespace BiscuitOS.Guts
                     username, password,
                 };
                 File.WriteAllLines(SystemFile, sysFileContents);
+
+
+                GenerateDefFiles(username, password);
             }
             catch
             {
                 Console.WriteLine("System Error 'x0001': Failed To Create System File");
             }
+        }
+
+        private static void GenerateDefFiles(string username, string password)
+        {
+            if (!Directory.Exists(@$"0:\Users\")) Directory.CreateDirectory(@$"0:\Users\");
+            if (!Directory.Exists(@$"0:\Users\{username}\")) Directory.CreateDirectory(@$"0:\Users\{username}\");
+            if (!Directory.Exists(@$"0:\Users\{username}\Documents\")) Directory.CreateDirectory(@$"0:\Users\{username}\Documents\");
+            if (!File.Exists(@$"0:\Users\{username}\Documents\Welcome.txt")) File.Create(@$"0:\Users\{username}\Documents\Welcome.txt");
+
+            string[] WelcomeFile =
+            {
+                "Welcome to BiscuitOS.",
+                "A light-weight terminal based operating system",
+                "Below are some basic commands to get started navigating the OS",
+                "",
+                "exit                      - Closes the operating system",
+                "cd [enter a folder name]  - Moves you into that folder",
+                "ls                        - Lists all the folders and files in the open folder",
+                "fm                        - Main way of making/deleting files",
+                "fm new [dir/file] [Name]  - Creates a folder or directory",
+                "fm del [dir/file] [Name]  - Deletes a folder or directory",
+                "open [file]               - Opens a files in the text editor",
+                "",
+                "You are currently in the text editor, to navigate you can use the arrow keys",
+                "on your keyboard. You can then type where you want. If you want to save press",
+                "colon ( : ) and type s. If you want to exit either press esc ( esc ) or use",
+                "colon ( : ) and type e.",
+            };
+
+            File.WriteAllLines(@$"0:\Users\{username}\Documents\Welcome.txt", WelcomeFile);
         }
 
         private static void StartShell()

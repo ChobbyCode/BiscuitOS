@@ -4,6 +4,7 @@ using BiscuitOS.FileExplorer;
 using S = BiscuitOS.Shell;
 using BiscuitOS.FileExplorer.Application;
 using System;
+using System.IO;
 
 
 namespace BiscuitOS
@@ -16,6 +17,8 @@ namespace BiscuitOS
         protected override void BeforeRun()
         {
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
+
+            Directory.Delete(@"0:\Biscuit\", true);
 
             Console.Clear();
             Console.WriteLine("BiscuitOS First Message: ");

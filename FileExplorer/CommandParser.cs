@@ -104,7 +104,13 @@ namespace BiscuitOS.FileExplorer
         {
             try
             {
-                Directory.Delete(FileMan.GetPath() + unLow[3] + @"\", true);
+                string FileName = string.Empty;
+                for (int i = 3; i < commandWord.Length - 3; i++)
+                {
+                    FileName = FileName + " " + unLow[i];
+                }
+
+                Directory.Delete(FileMan.GetPath() + FileName + @"\", true);
             }
             catch
             {
