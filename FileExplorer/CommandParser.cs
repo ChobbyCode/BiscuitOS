@@ -104,8 +104,7 @@ namespace BiscuitOS.FileExplorer
         {
             try
             {
-                BConsole.WriteLine("OPEN FOLDER: " + FileMan.GetPath() + unLow[3] + @"\");
-                Directory.Delete(FileMan.GetPath() + unLow[3] + @"\");
+                Directory.Delete(FileMan.GetPath() + unLow[3] + @"\", true);
             }
             catch
             {
