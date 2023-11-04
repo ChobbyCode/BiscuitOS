@@ -144,7 +144,7 @@ namespace BiscuitOS
             }
             else
             {
-                Console.WriteLine(msg + actionBar);
+                Console.Write(msg + actionBar);
             }
 
         }

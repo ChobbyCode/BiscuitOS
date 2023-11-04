@@ -18,8 +18,6 @@ namespace BiscuitOS
         {
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
-            Directory.Delete(@"0:\Biscuit\", true);
-
             Console.Clear();
             Console.WriteLine("BiscuitOS First Message: ");
             Console.WriteLine("Leave Blank For Normal Start. Type 'FORCE' To Do A Force Start: ");
