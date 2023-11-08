@@ -18,6 +18,11 @@ namespace BiscuitOS.Shell
 
             // Check for built in commands
 
+            if (cW[0] == "open")
+            {
+                BConsole.WriteLine("This is working, but not working too");
+            }
+
             try
             {
                 int SC = CheckSysCmd(cW[0], cW , unSplit);
@@ -44,11 +49,10 @@ namespace BiscuitOS.Shell
 
             // High Level
             int HL = CheckHighLevel(trigWord, args, unLow);
-            if (HL == 1 || HL == 2) return HL;
 
             // Low Level
             int LL = CheckLowLevel(trigWord, args, unLow);
-            if (LL == 1 || LL == 2) return LL;
+            if (LL == 1 || LL == 2 || HL == 1 || HL == 2) return 1;
 
             // No Command Was Found
             return 0;
@@ -110,6 +114,7 @@ namespace BiscuitOS.Shell
                     return 1;
                 case "open":
                     string[] open = { FileMan.GetPath() + args[1] };
+                    BConsole.WriteLine("Path: " + open[0]);
                     TextEditor.StartTextEditor(open);
                     return 1;
                 case "print":

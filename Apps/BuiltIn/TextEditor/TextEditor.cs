@@ -27,10 +27,11 @@ namespace BiscuitOS.Apps.TextEditor
                     lines.Add("");
                 }
             }
-            for(int i = 0; i <  lines.Count; i++)
+
+            /*for(int i = 0; i <  lines.Count; i++)
             {
                 lines[i] += " ";
-            }
+            }*/
 
             int lineEdit = 0; // The Line We Are Editting
             int letterEdit = 1; // The letter We Are Editting
