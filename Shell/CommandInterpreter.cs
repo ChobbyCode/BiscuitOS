@@ -49,10 +49,11 @@ namespace BiscuitOS.Shell
 
             // High Level
             int HL = CheckHighLevel(trigWord, args, unLow);
+            if (HL == 1 || HL == 2) return HL;
 
             // Low Level
             int LL = CheckLowLevel(trigWord, args, unLow);
-            if (LL == 1 || LL == 2 || HL == 1 || HL == 2) return 1;
+            if (LL == 1 || LL == 2) return LL;
 
             // No Command Was Found
             return 0;
@@ -94,6 +95,8 @@ namespace BiscuitOS.Shell
              * - This method can be anything except high level sys commands
              * 
              */
+
+            BConsole.WriteLine("Word: " + trigWord);
 
             switch (trigWord)
             {
