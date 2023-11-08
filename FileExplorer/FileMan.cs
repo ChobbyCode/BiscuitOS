@@ -42,6 +42,11 @@ namespace BiscuitOS.FileManager
 
         public static void CreateFile(string path)
         {
+            string[] basicContents =
+            {
+                ""
+            };
+
             if (!File.Exists(path))
             {
                 if (isRelative(path))
@@ -49,6 +54,7 @@ namespace BiscuitOS.FileManager
                     try
                     {
                         File.Create(GetPath() + path);
+                        File.WriteAllLines(GetPath() + path, basicContents);
                     }
                     catch
                     {
@@ -60,6 +66,7 @@ namespace BiscuitOS.FileManager
                     try
                     {
                         File.Create(path);
+                        File.WriteAllLines(path, basicContents);
                     }
                     catch
                     {

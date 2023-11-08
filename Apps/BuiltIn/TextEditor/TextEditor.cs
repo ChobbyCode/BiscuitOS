@@ -8,19 +8,12 @@ namespace BiscuitOS.Apps.TextEditor
     public class TextEditor
     {
         public static void StartTextEditor(string[] filePath)
-        {
-            try
-            {
-                // Start The Editor
-                string[] file = File.ReadAllLines(filePath[0]);
-                if(file == null) file = new string[1];
+        { 
+            // Start The Editor
+            string[] file = File.ReadAllLines(filePath[0]);
 
-                RenderScreen(file.ToArray(), 0, 1);
-                TextEditorM(file, filePath[0]);
-            }catch (Exception ex)
-            {
-                BConsole.WriteLine(ex.Message);
-            }
+            RenderScreen(file.ToArray(), 0, 1);
+            TextEditorM(file, filePath[0]);
         }
 
         private static void TextEditorM(string[] file, string path)
