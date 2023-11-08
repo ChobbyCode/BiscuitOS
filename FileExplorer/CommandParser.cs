@@ -21,6 +21,10 @@ namespace BiscuitOS.FileExplorer
                 case "delete":
                     Delete(commandWord, unLow);
                     break;
+                case "open":
+                    string[] args = { commandWord[2] };
+                    TextEditor.StartTextEditor(args);
+                    break;
                 default:
                     BConsole.WriteLine("Invalid Use Of Command 'fm'.");
                     break;

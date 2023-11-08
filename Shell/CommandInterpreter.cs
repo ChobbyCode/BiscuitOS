@@ -96,7 +96,9 @@ namespace BiscuitOS.Shell
              * 
              */
 
-            BConsole.WriteLine("Word: " + trigWord);
+            int stateReturn = 0;
+
+            BConsole.WriteLine($"Word: '{trigWord}'");
 
             switch (trigWord)
             {
@@ -116,9 +118,7 @@ namespace BiscuitOS.Shell
                     FileMan.ParseFileCommand(args, unLow);
                     return 1;
                 case "open":
-                    string[] open = { FileMan.GetPath() + args[1] };
-                    BConsole.WriteLine("Path: " + open[0]);
-                    TextEditor.StartTextEditor(open);
+                    BConsole.WriteLine("The 'open' command is now a sub-command of the 'fm' command. i.e. 'fm open..'");
                     return 1;
                 case "print":
                     BConsole.WriteLine(args[1]);
@@ -127,7 +127,7 @@ namespace BiscuitOS.Shell
                     // Not Implemented Error
                     return 2;
                 default:
-                    return 0;
+                    return stateReturn;
             }
         }
     }
