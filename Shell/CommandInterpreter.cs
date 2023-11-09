@@ -114,12 +114,14 @@ namespace BiscuitOS.Shell
                 case "bkdir":
                     FileMan.BackDir();
                     return 1;
-                case "open":
-                    BConsole.WriteLine("The 'open' command is now a sub-command of the 'fm' command. i.e. 'fm open..'");
-                    return 1;
                 case "fm":
                     FileMan.ParseFileCommand(args, unLow);
                     return 1;
+                case "open":
+                    BConsole.WriteLine("Before: " + args[1]);
+                    string[] file = { args[1] };
+                    TextEditor.StartTextEditor(file);
+                    break;
                 case "print":
                     BConsole.WriteLine(args[1]);
                     return 1;
