@@ -79,9 +79,6 @@ namespace BiscuitOS.Shell
                 case "system":
                     BiscuitOS.Shell.Commands.System.Execute(args);
                     return 1;
-                case "fm":
-                    FileMan.ParseFileCommand(args, unLow);
-                    return 1;
                 default:
                     return 0;
             }
@@ -119,6 +116,9 @@ namespace BiscuitOS.Shell
                     return 1;
                 case "open":
                     BConsole.WriteLine("The 'open' command is now a sub-command of the 'fm' command. i.e. 'fm open..'");
+                    return 1;
+                case "fm":
+                    FileMan.ParseFileCommand(args, unLow);
                     return 1;
                 case "print":
                     BConsole.WriteLine(args[1]);

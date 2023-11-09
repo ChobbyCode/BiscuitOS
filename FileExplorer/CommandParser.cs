@@ -22,6 +22,7 @@ namespace BiscuitOS.FileExplorer
                     Delete(commandWord, unLow);
                     break;
                 case "open":
+                    BConsole.WriteLine("Before: " + commandWord[2]);
                     string[] args = { commandWord[2] };
                     TextEditor.StartTextEditor(args);
                     break;

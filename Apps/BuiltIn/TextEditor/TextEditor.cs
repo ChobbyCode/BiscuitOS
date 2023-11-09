@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BiscuitOS.FileManager;
 
 namespace BiscuitOS.Apps.TextEditor
 {
@@ -11,11 +12,18 @@ namespace BiscuitOS.Apps.TextEditor
         {
             try
             {
+                List<string> lines = new List<string>();
                 // Start The Editor
-                string[] file = File.ReadAllLines(filePath[0]);
+                if (FileMan.isRelative(filePath[0]))
+                {
+                    lines = File.ReadAllLines(FileMan.GetPath() + filePath[0]).ToList();
+                }else
+                {
+                    lines = File.ReadAllLines(filePath[0]).ToList();
+                }
 
-                RenderScreen(file.ToArray(), 0, 1);
-                TextEditorM(file, filePath[0]);
+                RenderScreen(lines.ToArray(), 0, 1);
+                TextEditorM(lines.ToArray(), filePath[0]);
             }catch (Exception ex)
             {
                 BConsole.WriteLine(ex.Message);
