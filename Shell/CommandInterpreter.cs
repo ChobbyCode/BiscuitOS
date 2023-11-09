@@ -121,7 +121,7 @@ namespace BiscuitOS.Shell
                     BConsole.WriteLine("Before: " + args[1]);
                     string[] file = { args[1] };
                     TextEditor.StartTextEditor(file);
-                    break;
+                    return 1;
                 case "print":
                     BConsole.WriteLine(args[1]);
                     return 1;
