@@ -17,7 +17,7 @@ namespace BiscuitOS.Apps.TextEditor
                 {
                     string[] file = File.ReadAllLines(FileMan.GetPath() + filePath[0]);
 
-                    RenderScreen(file, 0, 1);
+                    RenderScreen(file, 0, 1, FileMan.GetPath() + filePath[0]);
                     TextEditorM(file, FileMan.GetPath() + filePath[0]);
 
                 }
@@ -25,7 +25,7 @@ namespace BiscuitOS.Apps.TextEditor
                 {
                     string[] file = File.ReadAllLines(filePath[0]);
 
-                    RenderScreen(file, 0, 1);
+                    RenderScreen(file, 0, 1, filePath[0]);
                     TextEditorM(file, filePath[0]);
                 }
             }catch (Exception ex)
@@ -153,7 +153,7 @@ namespace BiscuitOS.Apps.TextEditor
 
             // Debug
             renderLines[14] = $"Letter: {editLetter} | Line: {writeLine}";
-            renderLines[15] = $"Word: {renderLines[writeLine].Remove(0, editLetter).Split(" ").Length}";
+            renderLines[15] = $"Words: {renderLines[writeLine].Split(" ").Length}";
             renderLines[16] = $"File Path: '{path}'";
             if(lines == null) renderLines[17] = $"Null? true";
             else renderLines[17] = $"Null? false";
