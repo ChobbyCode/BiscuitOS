@@ -18,11 +18,6 @@ namespace BiscuitOS.Shell
 
             // Check for built in commands
 
-            if (cW[0] == "open")
-            {
-                BConsole.WriteLine("This is working, but not working too");
-            }
-
             try
             {
                 int SC = CheckSysCmd(cW[0], cW , unSplit);
@@ -96,8 +91,6 @@ namespace BiscuitOS.Shell
              * 
              */
 
-            int stateReturn = 0;
-
             BConsole.WriteLine($"Word: '{trigWord}'");
 
             switch (trigWord)
@@ -118,7 +111,6 @@ namespace BiscuitOS.Shell
                     FileMan.ParseFileCommand(args, unLow);
                     return 1;
                 case "open":
-                    BConsole.WriteLine("Before: " + args[1]);
                     string[] file = { args[1] };
                     TextEditor.StartTextEditor(file);
                     return 1;
@@ -129,7 +121,7 @@ namespace BiscuitOS.Shell
                     // Not Implemented Error
                     return 2;
                 default:
-                    return stateReturn;
+                    return 0;
             }
         }
     }

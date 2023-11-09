@@ -12,18 +12,22 @@ namespace BiscuitOS.Apps.TextEditor
         {
             try
             {
-                List<string> lines = new List<string>();
                 // Start The Editor
                 if (FileMan.isRelative(filePath[0]))
                 {
-                    lines = File.ReadAllLines(FileMan.GetPath() + filePath[0]).ToList();
-                }else
-                {
-                    lines = File.ReadAllLines(filePath[0]).ToList();
-                }
+                    string[] file = File.ReadAllLines(FileMan.GetPath() + filePath[0]);
 
-                RenderScreen(lines.ToArray(), 0, 1);
-                TextEditorM(lines.ToArray(), filePath[0]);
+                    RenderScreen(file, 0, 1);
+                    TextEditorM(file, FileMan.GetPath() + filePath[0]);
+
+                }
+                else
+                {
+                    string[] file = File.ReadAllLines(filePath[0]);
+
+                    RenderScreen(file, 0, 1);
+                    TextEditorM(file, filePath[0]);
+                }
             }catch (Exception ex)
             {
                 BConsole.WriteLine(ex.Message);
