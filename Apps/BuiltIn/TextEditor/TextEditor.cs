@@ -46,10 +46,10 @@ namespace BiscuitOS.Apps.TextEditor
                 }
             }
 
-            /*for(int i = 0; i <  lines.Count; i++)
+            for(int i = 0; i <  lines.Count; i++)
             {
                 lines[i] += " ";
-            }*/
+            }
 
             int lineEdit = 0; // The Line We Are Editting
             int letterEdit = 1; // The letter We Are Editting
@@ -128,13 +128,20 @@ namespace BiscuitOS.Apps.TextEditor
                     }
                 }
 
+                // Safe check so we not editing null value
+                if (letterEdit == 0)
+                {
+                    // Must be 2 because it a buffer for the next one and they probaly spamming
+                    letterEdit = 1;
+                }
+
                 // RenderScreen
-                RenderScreen(lines.ToArray(), lineEdit, letterEdit);
+                RenderScreen(lines.ToArray(), lineEdit, letterEdit, path);
             } while(key != ConsoleKey.Escape);
             Console.Clear();
         }
 
-        private static void RenderScreen(string[] lines, int writeLine, int editLetter)
+        private static void RenderScreen(string[] lines, int writeLine, int editLetter, string path)
         {
             // Render The Screen
             Console.Clear();
@@ -143,6 +150,13 @@ namespace BiscuitOS.Apps.TextEditor
             // Add Edit Line Notation
             renderLines[writeLine] = renderLines[writeLine].Insert(0, ">");
             renderLines[writeLine] = renderLines[writeLine].Insert(editLetter, "|<");
+
+            // Debug
+            renderLines[14] = $"Letter: {editLetter} | Line: {writeLine}";
+            renderLines[15] = $"Word: {renderLines[writeLine].Remove(0, editLetter).Split(" ").Length}";
+            renderLines[16] = $"File Path: '{path}'";
+            if(lines == null) renderLines[17] = $"Null? true";
+            else renderLines[17] = $"Null? false";
 
             int loop = 0;
             foreach(string line in renderLines)
