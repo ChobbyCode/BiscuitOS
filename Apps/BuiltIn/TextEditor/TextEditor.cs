@@ -160,7 +160,7 @@ namespace BiscuitOS.Apps.TextEditor
             if (debug)
             {
                 renderLines[14] = $"Letter: {editLetter} | Line: {writeLine}";
-                renderLines[15] = $"Words: {renderLines[writeLine].Split(" ").Length}";
+                renderLines[15] = $"Words: {renderLines[writeLine].Split(" ").Length - 1}";
                 renderLines[16] = $"File Path: '{path}'";
                 if (lines == null) renderLines[17] = $"Null? true";
                 else renderLines[17] = $"Null? false";
