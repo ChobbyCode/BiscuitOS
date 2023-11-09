@@ -53,6 +53,7 @@ namespace BiscuitOS.Apps.TextEditor
 
             int lineEdit = 0; // The Line We Are Editting
             int letterEdit = 1; // The letter We Are Editting
+            bool debugMode = false;
             
 
             ConsoleKey key;
@@ -112,6 +113,10 @@ namespace BiscuitOS.Apps.TextEditor
                     }else if(input == "e")
                     {
                         key = ConsoleKey.Escape;
+                    }else if(input == "d")
+                    {
+                        if(debugMode) debugMode = false;
+                        else debugMode = true;
                     }
                 }
                 else if (key != ConsoleKey.UpArrow && key != ConsoleKey.DownArrow && key != ConsoleKey.LeftArrow && key != ConsoleKey.RightArrow)
@@ -136,12 +141,12 @@ namespace BiscuitOS.Apps.TextEditor
                 }
 
                 // RenderScreen
-                RenderScreen(lines.ToArray(), lineEdit, letterEdit, path);
+                RenderScreen(lines.ToArray(), lineEdit, letterEdit, path, debugMode);
             } while(key != ConsoleKey.Escape);
             Console.Clear();
         }
 
-        private static void RenderScreen(string[] lines, int writeLine, int editLetter, string path)
+        private static void RenderScreen(string[] lines, int writeLine, int editLetter, string path, bool debug = false)
         {
             // Render The Screen
             Console.Clear();
@@ -152,11 +157,14 @@ namespace BiscuitOS.Apps.TextEditor
             renderLines[writeLine] = renderLines[writeLine].Insert(editLetter, "|<");
 
             // Debug
-            renderLines[14] = $"Letter: {editLetter} | Line: {writeLine}";
-            renderLines[15] = $"Words: {renderLines[writeLine].Split(" ").Length}";
-            renderLines[16] = $"File Path: '{path}'";
-            if(lines == null) renderLines[17] = $"Null? true";
-            else renderLines[17] = $"Null? false";
+            if (debug)
+            {
+                renderLines[14] = $"Letter: {editLetter} | Line: {writeLine}";
+                renderLines[15] = $"Words: {renderLines[writeLine].Split(" ").Length}";
+                renderLines[16] = $"File Path: '{path}'";
+                if (lines == null) renderLines[17] = $"Null? true";
+                else renderLines[17] = $"Null? false";
+            }
 
             int loop = 0;
             foreach(string line in renderLines)
