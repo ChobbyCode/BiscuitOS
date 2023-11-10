@@ -80,7 +80,7 @@ namespace BiscuitOS.Shell
             }
             //Password
             string pass = String.Empty;
-            while (pass != CorrectUser)
+            while (pass != CorrectPass)
             {
                 pass = BConsole.ReadRedacted("Password: ");
             }
