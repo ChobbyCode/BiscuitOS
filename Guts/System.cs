@@ -32,6 +32,7 @@ namespace BiscuitOS.Guts
             Console.WriteLine("Start BiscuitOS Boot Process..");
 
             Logger.StartLogger();
+
             GetSysInfo();
 
             OSStarted = true;
