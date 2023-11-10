@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BiscuitOS.ExceptionHandling;
+using System;
 
 
 
@@ -15,11 +16,9 @@ namespace BiscuitOS.Shell
             try
             {
                 commandLower = commandLower.ToLower();
-            }catch
+            }catch (Exception e) 
             {
-                BConsole.ForegroundColor = ConsoleColor.Red;
-                BConsole.WriteLine("Unable To Call c# Function .ToLower()");
-                BConsole.ForegroundColor = ConsoleColor.White;
+                OSException.CreateErrorLog(ErrorTypes.ParcingError, e, "Failed To Use C# Function ( .ToLower(); )");
             }
 
             // Parse command into lists
