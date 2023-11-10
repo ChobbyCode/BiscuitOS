@@ -15,26 +15,12 @@ namespace BiscuitOS.FileManager
         {
             if (!Directory.Exists(path))
             {
-                if(isRelative(path))
+                try
                 {
-                    try
-                    {
-                        Directory.CreateDirectory(GetPath() + path);
-                    }
-                    catch
-                    {
-
-                    }
-                }else
+                    Directory.CreateDirectory(ConvertToGoodPath(path) + @"/");
+                } catch
                 {
-                    try
-                    {
-                        Directory.CreateDirectory(path);
-                    }
-                    catch
-                    {
 
-                    }
                 }
             }
             return;
@@ -49,29 +35,14 @@ namespace BiscuitOS.FileManager
 
             if (!File.Exists(path))
             {
-                if (isRelative(path))
+                try
                 {
-                    try
-                    {
-                        File.Create(GetPath() + path);
-                        File.WriteAllLines(GetPath() + path, basicContents);
-                    }
-                    catch
-                    {
-
-                    }
+                    File.Create(ConvertToGoodPath(path));
+                    File.WriteAllLines(ConvertToGoodPath(path), basicContents);
                 }
-                else
+                catch
                 {
-                    try
-                    {
-                        File.Create(path);
-                        File.WriteAllLines(path, basicContents);
-                    }
-                    catch
-                    {
 
-                    }
                 }
             }
             return;
@@ -81,26 +52,13 @@ namespace BiscuitOS.FileManager
         {
             if (File.Exists(path))
             {
-                if (isRelative(path))
+                try
                 {
-                    try
-                    {
-                        File.Delete(GetPath() + path);
-                    }catch
-                    {
-
-                    }
+                    File.Delete(ConvertToGoodPath(path));
                 }
-                else
+                catch
                 {
-                    try
-                    {
-                        File.Delete(path);
-                    }
-                    catch
-                    {
 
-                    }
                 }
             }
         }
@@ -109,27 +67,13 @@ namespace BiscuitOS.FileManager
         {
             if (Directory.Exists(path))
             {
-                if (isRelative(path))
+                try
                 {
-                    try
-                    {
-                        Directory.Delete(GetPath() + path + @"\", true);
-                    }
-                    catch
-                    {
-
-                    }
+                    Directory.Delete(ConvertToGoodPath(path) + @"/");
                 }
-                else
+                catch
                 {
-                    try
-                    {
-                        Directory.Delete(path + @"\", true);
-                    }
-                    catch
-                    {
 
-                    }
                 }
             }
         }
@@ -177,6 +121,9 @@ namespace BiscuitOS.FileManager
             return CurrentDir;
         }
 
+        /// <summary>
+        /// Use ConvertToGoodPath() instead.
+        /// </summary>
         public static bool isRelative(string path)
         {
             bool relative = true;
@@ -220,6 +167,25 @@ namespace BiscuitOS.FileManager
             catch
             {
                 return new string[0];
+            }
+        }
+
+        public static string ConvertToGoodPath(string badPath)
+        {
+            try
+            {
+                if (isRelative(badPath))
+                {
+                    return GetPath() + badPath;
+                }
+                else
+                {
+                    return badPath;
+                }
+            }
+            catch
+            {
+                return badPath;
             }
         }
     }
