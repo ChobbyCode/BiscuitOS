@@ -84,6 +84,7 @@ namespace BiscuitOS.Shell
             {
                 pass = BConsole.ReadRedacted("Password: ");
             }
+            BConsole.Clear();
         }
 
         private static void TickTextShell()
