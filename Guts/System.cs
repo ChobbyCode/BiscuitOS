@@ -71,10 +71,10 @@ namespace BiscuitOS.Guts
                     // Do any extra things in the furture
 
                 }
-                catch
+                catch (Exception e)
                 {
                     // Hard to do errors because Shell hasn't started up so no user communication
-                    Console.WriteLine("System Error 'x0002': Failed To Read System File");
+                    OSException.CreateErrorLog(ErrorTypes.GutsError, e, "Failed To Read System Info File");
                 }
             }
             else
@@ -97,6 +97,7 @@ namespace BiscuitOS.Guts
                 {
                     // Hard to do errors because Shell hasn't started up so no user communication
                     Console.WriteLine("System Error 'x0001': Failed To Create System File");
+                    OSException.CreateErrorLog(ErrorTypes.GutsError, e, "Failed To Creat System Info File");
                     Console.WriteLine();
                     Console.WriteLine(e);
 
@@ -124,10 +125,11 @@ namespace BiscuitOS.Guts
                     return false;
                 }
             }
-            catch
+            catch (Exception e)
             {
                 // Starting Up Error || Shell hasn't started yet so it will be difficult to inform the user.
                 Console.WriteLine("System Error 'x0003': Failed To Find System File");
+                OSException.CreateErrorLog(ErrorTypes.GutsError, e, "Failed To Find System Info File");
                 return false;
             }
         }
@@ -175,9 +177,10 @@ namespace BiscuitOS.Guts
 
                 GenerateDefFiles(username, password);
             }
-            catch
+            catch (Exception e)
             {
                 Console.WriteLine("System Error 'x0001': Failed To Create System File");
+                OSException.CreateErrorLog(ErrorTypes.GutsError, e, "Failed To Create System Info File");
             }
         }
 

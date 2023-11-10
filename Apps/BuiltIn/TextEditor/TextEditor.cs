@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BiscuitOS.FileManager;
+using BiscuitOS.ExceptionHandling;
 
 namespace BiscuitOS.Apps.TextEditor
 {
@@ -28,9 +29,9 @@ namespace BiscuitOS.Apps.TextEditor
                     RenderScreen(file, 0, 1, filePath[0]);
                     TextEditorM(file, filePath[0]);
                 }
-            }catch (Exception ex)
+            }catch (Exception e)
             {
-                BConsole.WriteLine(ex.Message);
+                OSException.CreateErrorLog(ErrorTypes.AppLaunchError, e, "Failed To Launch Text Editor App");
             }
         }
 
