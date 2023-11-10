@@ -108,7 +108,7 @@ namespace BiscuitOS.Apps.TextEditor
                     // Delete Last Char
                     try
                     {
-                        lines[lineEdit] = lines[lineEdit].Remove(letterEdit, 1);
+                        lines[lineEdit] = lines[lineEdit].Remove(letterEdit - 1, 1);
                     }
                     catch
                     {
