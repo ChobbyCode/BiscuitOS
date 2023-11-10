@@ -65,7 +65,7 @@ namespace BiscuitOS.Apps.TextEditor
                 char readLet = consoleKey.KeyChar;
 
                 // Check If lineEdit Needs To Change
-                if(key == ConsoleKey.UpArrow && lineEdit != 0)
+                if (key == ConsoleKey.UpArrow && lineEdit != 0)
                 {
                     lineEdit--;
                     if (lines[lineEdit].Length < letterEdit)
@@ -73,7 +73,7 @@ namespace BiscuitOS.Apps.TextEditor
                         letterEdit = lines[lineEdit].Length;
                     }
                 }
-                if(key == ConsoleKey.DownArrow || key == ConsoleKey.Enter && lineEdit != lines.Count() - 1)
+                if (key == ConsoleKey.DownArrow || key == ConsoleKey.Enter && lineEdit != lines.Count() - 1)
                 {
                     lineEdit++;
                     if (lines[lineEdit].Length < letterEdit)
@@ -81,11 +81,11 @@ namespace BiscuitOS.Apps.TextEditor
                         letterEdit = lines[lineEdit].Length;
                     }
                 }
-                if(key == ConsoleKey.LeftArrow && letterEdit !>= 1)
+                if (key == ConsoleKey.LeftArrow && letterEdit! >= 1)
                 {
                     letterEdit--;
                 }
-                if(key == ConsoleKey.RightArrow && letterEdit < lines[lineEdit].Length)
+                if (key == ConsoleKey.RightArrow && letterEdit < lines[lineEdit].Length)
                 {
                     letterEdit++;
                 }
@@ -97,6 +97,18 @@ namespace BiscuitOS.Apps.TextEditor
                     {
                         lines[lineEdit] = lines[lineEdit].Remove(letterEdit - 2, 1);
                         letterEdit--;
+                    }
+                    catch
+                    {
+                        // Do Nothing
+                    }
+                }
+                else if (key == ConsoleKey.Delete)
+                {
+                    // Delete Last Char
+                    try
+                    {
+                        lines[lineEdit] = lines[lineEdit].Remove(letterEdit, 1);
                     }
                     catch
                     {
