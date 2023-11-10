@@ -1,4 +1,5 @@
-﻿using BiscuitOS.FileExplorer;
+﻿using BiscuitOS.ExceptionHandling;
+using BiscuitOS.FileExplorer;
 using System;
 using System.IO;
 
@@ -136,9 +137,9 @@ namespace BiscuitOS.FileManager
                     relative = false;
                 }
             }
-            catch
+            catch (Exception e) 
             {
-                BError.ParsingError();
+                OSException.CreateErrorLog(ErrorTypes.ParcingError, e, "File Writing Parcing Error");
             }
             return relative;
         }
