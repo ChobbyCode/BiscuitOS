@@ -89,6 +89,13 @@ namespace BiscuitOS.Apps.TextEditor
                 {
                     letterEdit++;
                 }
+                // 77 is the letters on a line
+                if(letterEdit >= 77)
+                {
+                    if(key != ConsoleKey.Spacebar) lines[lineEdit] = lines[lineEdit].Insert(letterEdit - 1, "-");
+                    letterEdit = 1;
+                    lineEdit++;
+                }
 
                 if (key == ConsoleKey.Backspace)
                 {
