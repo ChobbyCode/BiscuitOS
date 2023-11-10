@@ -7,7 +7,7 @@ namespace BiscuitOS.ExceptionHandling
 {
     public class Logger
     {
-        public static void CreateLog(string Message, LogType Type, Exception CSharpException = null, ErrorTypes Error = ErrorTypes.Unknown)
+        public static void CreateLog(string Message, LogType Type, OSException CSharpException = null, ErrorTypes Error = ErrorTypes.Unknown)
         {
             if (Type == LogType.Error) CreateErrorLog(Message, Error, CSharpException);
         }
@@ -40,7 +40,7 @@ namespace BiscuitOS.ExceptionHandling
             }
         }
 
-        private static void CreateErrorLog(string Message, ErrorTypes Error, Exception CSharpException)
+        private static void CreateErrorLog(string Message, ErrorTypes Error, OSException CSharpException)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace BiscuitOS.ExceptionHandling
             }
         }
 
-        private static string[] GetLogFile(string Message, ErrorTypes Error, Exception CSharpException)
+        private static string[] GetLogFile(string Message, ErrorTypes Error, OSException CSharpException)
         {
             if (Error == ErrorTypes.Unknown)
             {

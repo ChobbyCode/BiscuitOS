@@ -1,5 +1,6 @@
 ﻿using BiscuitOS.FileManager;
 using BiscuitOS.Shell;
+using BiscuitOS.ExceptionHandling;
 using System;
 using System.IO;
 
@@ -30,6 +31,7 @@ namespace BiscuitOS.Guts
             Console.Clear();
             Console.WriteLine("Start BiscuitOS Boot Process..");
 
+            Logger.StartLogger();
             GetSysInfo();
 
             OSStarted = true;
