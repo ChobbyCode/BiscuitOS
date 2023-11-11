@@ -9,7 +9,7 @@ namespace BiscuitOS.ExceptionHandling
     {
         public static void CreateLog(string Message, LogType Type, Exception CSharpException = null, ErrorTypes Error = ErrorTypes.Unknown)
         {
-            if (Type == LogType.Error) CreateErrorLog(Message, Error, CSharpException);
+            /*if (Type == LogType.Error) */CreateErrorLog(Message, Error, CSharpException);
         }
 
         public static void StartLogger()
@@ -54,9 +54,10 @@ namespace BiscuitOS.ExceptionHandling
 
                 File.WriteAllLines(@$"0:\Biscuit\CrashLogs\{CrashAmount}ErrorCrash{Error}.log", CrashLog);
             }
-            catch
+            catch (Exception e)
             {
-                Console.WriteLine("A Crash Occured Whilst Attempting To Create A Crash Report.");
+                BConsole.WriteLine("A Crash Occured Whilst Attempting To Create A Crash Report.");
+                BConsole.WriteLine(e.Message);
             }
         }
 

@@ -5,6 +5,7 @@ using S = BiscuitOS.Shell;
 using BiscuitOS.FileExplorer.Application;
 using System;
 using System.IO;
+using BiscuitOS.ExceptionHandling;
 
 
 namespace BiscuitOS
@@ -19,16 +20,16 @@ namespace BiscuitOS
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
             Console.Clear();
-            Console.WriteLine("BiscuitOS First Message: ");
-            Console.WriteLine("Leave Blank For Normal Start. Type 'FORCE' To Do A Force Start: ");
-            var input = Console.ReadLine();
-            if(input == "FORCE")
+            Guts.System.OSStartUp();
+
+            try
             {
-                S.Shell.InitShell(Shell.ShellMode.Text);
+                File.WriteAllText("Bob/bob/bob.txt", "Nope");
             }
-            else
+            catch (Exception ex) 
             {
-                Guts.System.OSStartUp();
+                BConsole.WriteLine("Error");
+                OSException.CreateErrorLog(ErrorTypes.Unknown, ex, "This is a message");
             }
 
             //Renderer.StartGUIMode();
